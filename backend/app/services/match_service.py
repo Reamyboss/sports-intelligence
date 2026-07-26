@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, UTC
 
 from app.models.match import Match
 
@@ -10,6 +10,6 @@ def get_matches() -> list[Match]:
             home_team="Arsenal",
             away_team="Chelsea",
             competition="Premier League",
-            kickoff=datetime(2026, 8, 1, 17, 30),
+            kickoff=datetime(2026, 8, 1, 17, 30, tzinfo=UTC),
         )
     ]
