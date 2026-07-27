@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "Arsenal",
+        "country": "England",
+        "league": "Premier League",
+        "stadium": "Emirates Stadium",
+        "manager": "Mikel Arteta",
+        "founded": 1886,
+        "nickname": "The Gunners"
+    },
+    {
+        "id": 2,
+        "name": "Chelsea",
+        "country": "England",
+        "league": "Premier League",
+        "stadium": "Stamford Bridge",
+        "manager": "Enzo Maresca",
+        "founded": 1905,
+        "nickname": "The Blues"
+    }
+]
