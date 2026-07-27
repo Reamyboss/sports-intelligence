@@ -2,6 +2,10 @@ from pydantic import BaseModel
 
 
 class Team(BaseModel):
+    """
+    Represents the permanent identity of a football club.
+    """
+
     id: int
 
     name: str
@@ -10,12 +14,6 @@ class Team(BaseModel):
 
     league: str
 
-    fifa_rating: float = 0.0
+    stadium: str
 
-    attack_rating: float = 0.0
-
-    midfield_rating: float = 0.0
-
-    defense_rating: float = 0.0
-
-    goalkeeper_rating: float = 0.0
+    manager: str
