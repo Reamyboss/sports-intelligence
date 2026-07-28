@@ -1,15 +1,12 @@
-from datetime import UTC, datetime
-
-from app.models.match import Match
+from app.repositories.match_repository import MatchRepository
 
 
-def get_matches() -> list[Match]:
-    return [
-        Match(
-            id=1,
-            home_team="Arsenal",
-            away_team="Chelsea",
-            competition="Premier League",
-            kickoff=datetime(2026, 8, 1, 17, 30, tzinfo=UTC),
-        )
-    ]
+class MatchService:
+    def __init__(self):
+        self.repository = MatchRepository()
+
+    def list_matches(self) -> list[dict]:
+        return self.repository.get_all_matches()
+
+    def get_match(self, match_id: int) -> dict | None:
+        return self.repository.get_match(match_id)
