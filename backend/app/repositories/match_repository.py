@@ -47,6 +47,15 @@ class MatchRepository:
             if match["home_team"] == team
             or match["away_team"] == team
         ]
+    def get_finished_matches_by_team(
+        self,
+        team: str,
+    ) -> list[dict]:
+       return [
+        match
+        for match in self.get_matches_by_team(team)
+        if match["status"] == "finished"
+    ]
 
     def save_matches(
         self,
@@ -62,3 +71,4 @@ class MatchRepository:
                 indent=2,
                 ensure_ascii=False,
             )
+        
