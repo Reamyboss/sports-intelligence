@@ -3,23 +3,32 @@ from app.repositories.match_repository import MatchRepository
 
 
 class HistoricalMatchCollector:
+    """
+    Downloads completed matches from previous seasons.
+    """
+
     def __init__(self):
         self.provider = FootballDataProvider()
         self.repository = MatchRepository()
 
-    def collect(self, competition: str = "PL") -> int:
-        """
-        Download completed historical matches and store them.
-        """
+    def collect(
+        self,
+        competition: str = "PL",
+        season: int = 2025,
+    ) -> int:
+        matches = self.provider.fetch_season_matches(
+            competition=competition,
+            season=season,
+        )
 
-        matches = self.provider.fetch_matches(competition)
-
-        historical = [
+        finished_matches = [
             match
             for match in matches
             if match["status"] == "FINISHED"
         ]
 
-        self.repository.save_matches(historical)
+        self.repository.save_historical_matches(
+    finished_matches
+)
 
-        return len(historical)
+        return len(finished_matches)

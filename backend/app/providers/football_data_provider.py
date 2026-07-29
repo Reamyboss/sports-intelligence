@@ -21,7 +21,7 @@ class FootballDataProvider:
         competition: str = "PL",
     ) -> list[dict]:
         """
-        Fetch current season matches.
+        Fetch current season fixtures.
         """
 
         response = self.client.get(
@@ -40,7 +40,7 @@ class FootballDataProvider:
         season: int,
     ) -> list[dict]:
         """
-        Fetch matches for a specific historical season.
+        Fetch matches from a specific historical season.
         """
 
         response = self.client.get(
