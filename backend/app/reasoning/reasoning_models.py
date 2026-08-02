@@ -1,0 +1,26 @@
+from pydantic import BaseModel
+
+from app.evidence.evidence_models import Evidence
+
+
+class ReasoningResult(BaseModel):
+    """
+    Final reasoning produced from all available evidence.
+    This is NOT a prediction.
+    """
+
+    strengths: list[str]
+
+    weaknesses: list[str]
+
+    risks: list[str]
+
+    opportunities: list[str]
+
+    contradictions: list[str]
+
+    confidence: float
+
+    summary: str
+
+    supporting_evidence: list[Evidence]

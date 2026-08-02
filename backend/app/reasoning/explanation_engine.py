@@ -1,19 +1,21 @@
-from app.knowledge.match_profile import MatchProfile
+from app.reasoning.reasoning_models import ReasoningResult
 
 
-def explain(profile: MatchProfile) -> list[str]:
-    reasons = []
+def explain(result: ReasoningResult) -> list[str]:
+    """
+    Convert structured reasoning into readable explanations.
+    """
 
-    if profile.home_advantage:
-        reasons.append("Home advantage")
+    explanations = []
 
-    if profile.home_form.count("W") > profile.away_form.count("W"):
-        reasons.append("Better recent form")
+    explanations.extend(result.strengths)
 
-    if (
-        profile.head_to_head["home_wins"]
-        > profile.head_to_head["away_wins"]
-    ):
-        reasons.append("Superior head-to-head record")
+    explanations.extend(result.opportunities)
 
-    return reasons
+    explanations.extend(result.risks)
+
+    explanations.extend(result.weaknesses)
+
+    explanations.extend(result.contradictions)
+
+    return explanations
