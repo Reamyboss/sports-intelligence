@@ -61,22 +61,44 @@ class MatchRepository:
         self,
         team: str,
     ) -> list[dict]:
-        return [
+        combined = (
+            self.get_all_matches()
+            + self.get_all_historical_matches()
+        )
+
+        finished = [
             match
-            for match in self.get_matches_by_team(team)
+            for match in combined
             if match["status"].lower() == "finished"
+            and (
+                match["home_team"] == team
+                or match["away_team"] == team
+            )
         ]
+
+        for match in finished:
+            match.setdefault("kickoff", match.get("utc_date"))
+
+        return finished
 
     def save_matches(
         self,
         matches: list[dict],
     ) -> None:
+        merged = {
+            match["id"]: match
+            for match in self.get_all_matches()
+        }
+
+        for match in matches:
+            merged[match["id"]] = match
+
         with self.matches_file.open(
             "w",
             encoding="utf-8",
         ) as file:
             json.dump(
-                matches,
+                list(merged.values()),
                 file,
                 indent=2,
                 ensure_ascii=False,
@@ -100,12 +122,20 @@ class MatchRepository:
         self,
         matches: list[dict],
     ) -> None:
+        merged = {
+            match["id"]: match
+            for match in self.get_all_historical_matches()
+        }
+
+        for match in matches:
+            merged[match["id"]] = match
+
         with self.historical_matches_file.open(
             "w",
             encoding="utf-8",
         ) as file:
             json.dump(
-                matches,
+                list(merged.values()),
                 file,
                 indent=2,
                 ensure_ascii=False,

@@ -36,3 +36,6 @@ class HistoricalMatchCollector:
         )
 
         return len(finished_matches)
+
+    def close(self) -> None:
+        self.provider.close()

@@ -1,23 +1,26 @@
 from fastapi import APIRouter, HTTPException
 
+from app.evidence.evidence_builder import build_evidence
 from app.knowledge.knowledge_builder import build_match_profile
-from app.prediction.prediction_engine import predict
-from app.services.match_service import get_matches
+from app.prediction.prediction_models import PredictionResult
+from app.prediction.prediction_service import run_prediction
+from app.services.match_service import MatchService
 
 router = APIRouter(
     prefix="/prediction",
     tags=["Prediction"],
 )
 
+match_service = MatchService()
 
-@router.get("/{match_id}")
-def get_prediction(match_id: int):
-    matches = get_matches()
 
-    match = next(
-        (m for m in matches if m.id == match_id),
-        None,
-    )
+@router.get("/{match_id}", response_model=PredictionResult)
+def get_prediction(match_id: int) -> PredictionResult:
+    """
+    Generate an AI prediction for a specific match.
+    """
+
+    match = match_service.get_match(match_id)
 
     if match is None:
         raise HTTPException(
@@ -27,4 +30,13 @@ def get_prediction(match_id: int):
 
     profile = build_match_profile(match)
 
-    return predict(profile)
+    evidence = build_evidence(profile)
+
+    supporting_evidence = []
+
+    prediction = run_prediction(
+        evidence=evidence,
+        supporting_evidence=supporting_evidence,
+    )
+
+    return prediction

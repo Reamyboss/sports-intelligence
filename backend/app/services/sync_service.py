@@ -7,19 +7,17 @@ class SyncService:
         self.provider = FootballDataProvider()
         self.repository = MatchRepository()
 
-    def sync_premier_league(self) -> int:
-        payload = self.provider.fetch_matches("PL")
-
-        competition = payload["competition"]["name"]
+    def sync_competition(self, competition: str) -> int:
+        matches_payload = self.provider.fetch_matches(competition)
 
         matches = []
 
-        for match in payload["matches"]:
+        for match in matches_payload:
             matches.append(
                 {
                     "id": match["id"],
-                    "competition": competition,
-                    "season": int(payload["filters"]["season"]),
+                    "competition": match["competition"]["name"],
+                    "season": int(match["season"]["startDate"][:4]),
                     "matchday": match.get("matchday"),
                     "kickoff": match["utcDate"],
                     "status": match["status"].lower(),
@@ -32,6 +30,10 @@ class SyncService:
 
         self.repository.save_matches(matches)
 
-        self.provider.close()
-
         return len(matches)
+
+    def sync_premier_league(self) -> int:
+        return self.sync_competition("PL")
+
+    def close(self) -> None:
+        self.provider.close()
