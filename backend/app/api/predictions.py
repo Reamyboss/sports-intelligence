@@ -30,7 +30,11 @@ def get_prediction(match_id: int) -> PredictionResult:
 
     profile = build_match_profile(match)
 
-    evidence = build_evidence(profile)
+    evidence = build_evidence(
+        profile,
+        match_id=match.id,
+        kickoff=match.kickoff,
+    )
 
     supporting_evidence = []
 

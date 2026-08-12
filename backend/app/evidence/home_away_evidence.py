@@ -1,11 +1,21 @@
+from datetime import datetime
+
 from app.repositories.match_repository import MatchRepository
 
 
 repository = MatchRepository()
 
 
-def get_home_away_statistics(team: str) -> dict:
-    matches = repository.get_finished_matches_by_team(team)
+def get_home_away_statistics(
+    team: str,
+    before: datetime | None = None,
+    exclude_match_id: int | None = None,
+) -> dict:
+    matches = repository.get_finished_matches_by_team(
+        team,
+        before=before,
+        exclude_match_id=exclude_match_id,
+    )
 
     home = {
         "wins": 0,

@@ -17,7 +17,7 @@ def test_full_pipeline_produces_a_structurally_valid_prediction(real_match_id):
     match = MatchService().get_match(real_match_id)
 
     profile = build_match_profile(match)
-    evidence = build_evidence(profile)
+    evidence = build_evidence(profile, match_id=match.id, kickoff=match.kickoff)
     result = run_prediction(evidence=evidence, supporting_evidence=[])
 
     assert result.winner in ("HOME", "AWAY", "DRAW")
@@ -34,7 +34,7 @@ def test_pipeline_evidence_has_expected_shape_for_both_teams(real_match_id):
     match = MatchService().get_match(real_match_id)
 
     profile = build_match_profile(match)
-    evidence = build_evidence(profile)
+    evidence = build_evidence(profile, match_id=match.id, kickoff=match.kickoff)
 
     for side in ("home_team", "away_team"):
         assert set(evidence[side]["goals"]) == {

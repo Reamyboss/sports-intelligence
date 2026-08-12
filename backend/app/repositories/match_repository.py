@@ -1,5 +1,8 @@
 import json
+from datetime import datetime
 from pathlib import Path
+
+from app.utils.helpers import parse_kickoff
 
 
 class MatchRepository:
@@ -60,7 +63,20 @@ class MatchRepository:
     def get_finished_matches_by_team(
         self,
         team: str,
+        before: datetime | None = None,
+        exclude_match_id: int | None = None,
     ) -> list[dict]:
+        """
+        Finished matches involving `team`.
+
+        `before`, when given, excludes any match whose kickoff is not
+        strictly earlier than it - and excludes matches with a
+        missing/unparseable kickoff entirely, rather than guessing.
+        `exclude_match_id` always excludes that match by id, regardless
+        of its date, so a match can never contribute evidence to its
+        own prediction.
+        """
+
         combined = (
             self.get_all_matches()
             + self.get_all_historical_matches()
@@ -78,6 +94,24 @@ class MatchRepository:
 
         for match in finished:
             match.setdefault("kickoff", match.get("utc_date"))
+
+        if exclude_match_id is not None:
+            finished = [
+                match
+                for match in finished
+                if match.get("id") != exclude_match_id
+            ]
+
+        if before is not None:
+            bounded = []
+
+            for match in finished:
+                kickoff = parse_kickoff(match)
+
+                if kickoff is not None and kickoff < before:
+                    bounded.append(match)
+
+            finished = bounded
 
         return finished
 

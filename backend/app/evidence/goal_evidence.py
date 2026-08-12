@@ -1,15 +1,25 @@
+from datetime import datetime
+
 from app.repositories.match_repository import MatchRepository
 
 
 repository = MatchRepository()
 
 
-def get_goal_statistics(team: str) -> dict:
+def get_goal_statistics(
+    team: str,
+    before: datetime | None = None,
+    exclude_match_id: int | None = None,
+) -> dict:
     """
     Calculate goal statistics from historical matches.
     """
 
-    matches = repository.get_finished_matches_by_team(team)
+    matches = repository.get_finished_matches_by_team(
+        team,
+        before=before,
+        exclude_match_id=exclude_match_id,
+    )
 
     if not matches:
         return {

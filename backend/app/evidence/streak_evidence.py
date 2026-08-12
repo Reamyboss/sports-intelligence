@@ -1,19 +1,42 @@
-from app.repositories.match_repository import MatchRepository
+from datetime import datetime
 
+from app.repositories.match_repository import MatchRepository
+from app.utils.helpers import parse_kickoff
 
 repository = MatchRepository()
 
 
-def get_current_streak(team: str) -> dict:
+def get_current_streak(
+    team: str,
+    before: datetime | None = None,
+    exclude_match_id: int | None = None,
+) -> dict:
     """
-    Calculates the team's current streaks.
+    Calculates the team's current streaks from matches strictly
+    ordered by kickoff date - not JSON/file order.
     """
 
-    matches = repository.get_finished_matches_by_team(team)
+    matches = repository.get_finished_matches_by_team(
+        team,
+        before=before,
+        exclude_match_id=exclude_match_id,
+    )
+
+    dated_matches = [
+        (parse_kickoff(match), match) for match in matches
+    ]
+
+    dated_matches = [
+        (kickoff, match)
+        for kickoff, match in dated_matches
+        if kickoff is not None
+    ]
+
+    dated_matches.sort(key=lambda item: item[0], reverse=True)
 
     results = []
 
-    for match in matches:
+    for _, match in dated_matches:
 
         if match["home_team"] == team:
 
@@ -37,7 +60,8 @@ def get_current_streak(team: str) -> dict:
             else:
                 results.append("D")
 
-    results.reverse()
+    # results is already most-recent-first, since dated_matches was
+    # sorted that way above.
 
     winning_streak = 0
     unbeaten_streak = 0

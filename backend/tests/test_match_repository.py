@@ -1,3 +1,5 @@
+from datetime import datetime, timezone
+
 from app.repositories.match_repository import MatchRepository
 
 
@@ -14,13 +16,20 @@ def make_repo(tmp_path):
     return repo
 
 
-def match(id, competition, status="scheduled", home_score=None, away_score=None):
+def match(
+    id,
+    competition,
+    status="scheduled",
+    home_score=None,
+    away_score=None,
+    kickoff="2026-08-21T19:00:00Z",
+):
     return {
         "id": id,
         "competition": competition,
         "season": 2026,
         "matchday": 1,
-        "kickoff": "2026-08-21T19:00:00Z",
+        "kickoff": kickoff,
         "status": status,
         "home_team": "Team A",
         "away_team": "Team B",
@@ -140,3 +149,95 @@ def test_scheduled_matches_are_excluded_from_finished_lookup(tmp_path):
     repo.save_historical_matches([])
 
     assert repo.get_finished_matches_by_team("Arsenal FC") == []
+
+
+# -----------------------------
+# Temporal boundary (before / exclude_match_id)
+# -----------------------------
+
+
+def test_before_cutoff_excludes_matches_on_or_after_it(tmp_path):
+    """
+    Only matches strictly earlier than `before` should be returned -
+    matches on or after it (including one at the exact same instant)
+    must not leak in.
+    """
+
+    repo = make_repo(tmp_path)
+
+    repo.save_historical_matches(
+        [
+            {
+                **match(1, "Premier League", status="FINISHED", home_score=1, away_score=0,
+                        kickoff="2026-01-01T00:00:00Z"),
+                "home_team": "Arsenal FC",
+                "away_team": "Chelsea FC",
+            },
+            {
+                **match(2, "Premier League", status="FINISHED", home_score=2, away_score=0,
+                        kickoff="2026-06-01T00:00:00Z"),
+                "home_team": "Arsenal FC",
+                "away_team": "Chelsea FC",
+            },
+        ]
+    )
+
+    cutoff = datetime(2026, 6, 1, tzinfo=timezone.utc)
+
+    finished = repo.get_finished_matches_by_team("Arsenal FC", before=cutoff)
+
+    assert {m["id"] for m in finished} == {1}
+
+
+def test_exclude_match_id_removes_that_match_regardless_of_date(tmp_path):
+    """
+    A match must never be able to contribute to its own evidence,
+    independent of the date-based cutoff.
+    """
+
+    repo = make_repo(tmp_path)
+
+    repo.save_historical_matches(
+        [
+            {
+                **match(1, "Premier League", status="FINISHED", home_score=1, away_score=0,
+                        kickoff="2026-01-01T00:00:00Z"),
+                "home_team": "Arsenal FC",
+                "away_team": "Chelsea FC",
+            },
+        ]
+    )
+
+    cutoff = datetime(2026, 6, 1, tzinfo=timezone.utc)
+
+    finished = repo.get_finished_matches_by_team(
+        "Arsenal FC", before=cutoff, exclude_match_id=1,
+    )
+
+    assert finished == []
+
+
+def test_missing_or_invalid_kickoff_is_excluded_not_guessed(tmp_path):
+    """
+    A match with no parseable date can't be proven to be "before" the
+    cutoff, so it must be excluded rather than assumed safe.
+    """
+
+    repo = make_repo(tmp_path)
+
+    repo.save_historical_matches(
+        [
+            {
+                **match(1, "Premier League", status="FINISHED", home_score=1, away_score=0),
+                "home_team": "Arsenal FC",
+                "away_team": "Chelsea FC",
+                "kickoff": "not-a-date",
+            },
+        ]
+    )
+
+    cutoff = datetime(2027, 1, 1, tzinfo=timezone.utc)
+
+    finished = repo.get_finished_matches_by_team("Arsenal FC", before=cutoff)
+
+    assert finished == []
