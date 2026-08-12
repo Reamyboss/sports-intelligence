@@ -10,6 +10,8 @@ def make_reasoning(
     contradictions=0,
 ):
     return ReasoningResult(
+        home_team="Home Team",
+        away_team="Away Team",
         strengths=["s"] * strengths,
         weaknesses=["w"] * weaknesses,
         risks=["r"] * risks,

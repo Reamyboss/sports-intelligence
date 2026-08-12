@@ -60,3 +60,28 @@ def normalize_match(raw_match: dict) -> dict:
         "away_score": away_score,
         "winner": winner,
     }
+
+
+def normalize_team(raw_team: dict, competition_code: str) -> dict:
+    """
+    Normalize a Football-Data.org team into the Sports Intelligence
+    internal team format (matches app.models.team.Team).
+    """
+
+    league_name = competition_code
+
+    for competition in raw_team.get("runningCompetitions", []):
+        if competition.get("code") == competition_code:
+            league_name = competition.get("name", competition_code)
+            break
+
+    coach = raw_team.get("coach") or {}
+
+    return {
+        "id": raw_team["id"],
+        "name": raw_team["name"],
+        "country": raw_team["area"]["name"],
+        "league": league_name,
+        "stadium": raw_team.get("venue") or "Unknown",
+        "manager": coach.get("name") or "Unknown",
+    }

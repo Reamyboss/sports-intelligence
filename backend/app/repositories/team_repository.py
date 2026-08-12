@@ -25,3 +25,23 @@ class TeamRepository:
             ),
             None,
         )
+
+    def save_teams(self, teams: list[dict]) -> None:
+        merged = {
+            team["id"]: team
+            for team in self.get_all()
+        }
+
+        for team in teams:
+            merged[team["id"]] = team
+
+        with self.data_file.open(
+            "w",
+            encoding="utf-8",
+        ) as file:
+            json.dump(
+                list(merged.values()),
+                file,
+                indent=2,
+                ensure_ascii=False,
+            )

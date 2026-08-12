@@ -18,6 +18,7 @@ def test_prediction_endpoint_returns_valid_prediction(client, real_match_id):
     assert body["market"] == "MATCH_WINNER"
     assert isinstance(body["explanation"], list)
     assert "reasoning" in body
+    assert isinstance(body["summary"], str) and body["summary"]
 
 
 def test_prediction_endpoint_404_for_unknown_match(client, unknown_match_id):

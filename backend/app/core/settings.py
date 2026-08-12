@@ -6,11 +6,15 @@ load_dotenv()
 
 
 class Settings:
-    def __init__(self):
-        self.FOOTBALL_DATA_API_KEY = os.getenv("FOOTBALL_DATA_API_KEY")
+    FOOTBALL_DATA_API_KEY: str
 
-        if not self.FOOTBALL_DATA_API_KEY:
+    def __init__(self):
+        api_key = os.getenv("FOOTBALL_DATA_API_KEY")
+
+        if not api_key:
             raise ValueError("FOOTBALL_DATA_API_KEY not found in .env")
+
+        self.FOOTBALL_DATA_API_KEY = api_key
 
 
 settings = Settings()

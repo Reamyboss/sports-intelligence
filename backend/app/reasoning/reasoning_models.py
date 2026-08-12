@@ -9,6 +9,9 @@ class ReasoningResult(BaseModel):
     This is NOT a prediction.
     """
 
+    home_team: str
+    away_team: str
+
     strengths: list[str]
 
     weaknesses: list[str]

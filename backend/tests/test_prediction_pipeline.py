@@ -26,6 +26,8 @@ def test_full_pipeline_produces_a_structurally_valid_prediction(real_match_id):
     assert result.market == "MATCH_WINNER"
     assert isinstance(result.explanation, list)
     assert result.reasoning.summary
+    assert result.summary
+    assert match.home_team in result.summary or match.away_team in result.summary
 
 
 def test_pipeline_evidence_has_expected_shape_for_both_teams(real_match_id):

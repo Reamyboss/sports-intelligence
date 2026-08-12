@@ -98,12 +98,14 @@ cd backend
 python sync_matches.py                        # Premier League fixtures only
 python scripts/collect_historical_matches.py   # Premier League 2025/26 results only
 python scripts/sync_all_competitions.py        # all 12 available competitions, paced for rate limits (~3-4 min)
+python scripts/sync_all_teams.py               # team rosters for all 12 competitions (~1-2 min)
 ```
 
-These write to `app/data/matches.json` (current-season fixtures) and
+These write to `app/data/matches.json` (current-season fixtures),
 `app/data/historical_matches.json` (completed results, used for team form/
-goals/streak evidence). Saves merge by match id — re-running any of these is
-safe and won't erase other competitions' data.
+goals/streak evidence), and `app/data/teams.json` (team directory). All
+saves merge by id — re-running any of these is safe and won't erase other
+competitions' data.
 
 ## API surface
 
@@ -122,8 +124,17 @@ default for local frontend development — see `CORS_ORIGINS` in
 
 ## Known limitations
 
-- **`teams.json` has 2 hand-seeded teams.** No real team-sync exists yet;
-  `/teams/` is nowhere near full coverage for any league.
+- **A team's `league` field reflects whichever competition it was most
+  recently synced under, not all of them.** `Team.league` is a single
+  string, but a club can appear in several competitions (e.g. a domestic
+  league and the Champions League) with the same football-data.org id — the
+  last sync wins. Visible in the real data: Champions League overlap pulls
+  some clubs' `league` away from their domestic league. Fixing this properly
+  means changing `league: str` to a list, which hasn't been done since it
+  changes the API contract.
+- **Most `manager` values are `"Unknown"`.** football-data.org's coach data
+  is sparse on the current plan — this isn't a bug in the sync, the upstream
+  field is genuinely null for most teams right now.
 - **No scheduled refresh.** Someone has to re-run the sync scripts manually
   to pick up new results as matches get played.
 - **Reasoning rules are coarse binary thresholds**, not weighted (e.g. "away

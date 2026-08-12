@@ -4,6 +4,8 @@ from app.reasoning.reasoning_models import ReasoningResult
 
 def make_reasoning(strengths=0, risks=0, opportunities=0, contradictions=0):
     return ReasoningResult(
+        home_team="Home Team",
+        away_team="Away Team",
         strengths=["s"] * strengths,
         weaknesses=[],
         risks=["r"] * risks,

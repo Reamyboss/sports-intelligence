@@ -1,22 +1,1962 @@
 [
-    {
-        "id": 1,
-        "name": "Arsenal",
-        "country": "England",
-        "league": "Premier League",
-        "stadium": "Emirates Stadium",
-        "manager": "Mikel Arteta",
-        "founded": 1886,
-        "nickname": "The Gunners"
-    },
-    {
-        "id": 2,
-        "name": "Chelsea",
-        "country": "England",
-        "league": "Premier League",
-        "stadium": "Stamford Bridge",
-        "manager": "Enzo Maresca",
-        "founded": 1905,
-        "nickname": "The Blues"
-    }
+  {
+    "id": 59,
+    "name": "Blackburn Rovers FC",
+    "country": "England",
+    "league": "Championship",
+    "stadium": "Ewood Park",
+    "manager": "Unknown"
+  },
+  {
+    "id": 60,
+    "name": "Bolton Wanderers FC",
+    "country": "England",
+    "league": "Championship",
+    "stadium": "University of Bolton Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 68,
+    "name": "Norwich City FC",
+    "country": "England",
+    "league": "Championship",
+    "stadium": "Carrow Road",
+    "manager": "Unknown"
+  },
+  {
+    "id": 69,
+    "name": "Queens Park Rangers FC",
+    "country": "England",
+    "league": "Championship",
+    "stadium": "Kiyan Prince Foundation Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 70,
+    "name": "Stoke City FC",
+    "country": "England",
+    "league": "Championship",
+    "stadium": "Bet365 Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 72,
+    "name": "Swansea City AFC",
+    "country": "Wales",
+    "league": "Championship",
+    "stadium": "Liberty Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 74,
+    "name": "West Bromwich Albion FC",
+    "country": "England",
+    "league": "Championship",
+    "stadium": "The Hawthorns",
+    "manager": "Unknown"
+  },
+  {
+    "id": 76,
+    "name": "Wolverhampton Wanderers FC",
+    "country": "England",
+    "league": "Championship",
+    "stadium": "Molineux Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 325,
+    "name": "Portsmouth FC",
+    "country": "England",
+    "league": "Championship",
+    "stadium": "Fratton Park",
+    "manager": "Unknown"
+  },
+  {
+    "id": 328,
+    "name": "Burnley FC",
+    "country": "England",
+    "league": "Championship",
+    "stadium": "Turf Moor",
+    "manager": "Unknown"
+  },
+  {
+    "id": 332,
+    "name": "Birmingham City FC",
+    "country": "England",
+    "league": "Championship",
+    "stadium": "St Andrew's Trillion Trophy Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 340,
+    "name": "Southampton FC",
+    "country": "England",
+    "league": "Championship",
+    "stadium": "St. Mary's Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 342,
+    "name": "Derby County FC",
+    "country": "England",
+    "league": "Championship",
+    "stadium": "iPro Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 343,
+    "name": "Middlesbrough FC",
+    "country": "England",
+    "league": "Championship",
+    "stadium": "Riverside Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 346,
+    "name": "Watford FC",
+    "country": "England",
+    "league": "Championship",
+    "stadium": "Vicarage Road Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 348,
+    "name": "Charlton Athletic FC",
+    "country": "England",
+    "league": "Championship",
+    "stadium": "The Valley",
+    "manager": "Unknown"
+  },
+  {
+    "id": 356,
+    "name": "Sheffield United FC",
+    "country": "England",
+    "league": "Championship",
+    "stadium": "Bramall Lane",
+    "manager": "Unknown"
+  },
+  {
+    "id": 384,
+    "name": "Millwall FC",
+    "country": "England",
+    "league": "Championship",
+    "stadium": "The Den",
+    "manager": "Unknown"
+  },
+  {
+    "id": 387,
+    "name": "Bristol City FC",
+    "country": "England",
+    "league": "Championship",
+    "stadium": "Ashton Gate Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 404,
+    "name": "Wrexham AFC",
+    "country": "Wales",
+    "league": "Championship",
+    "stadium": "Racecourse Ground",
+    "manager": "Unknown"
+  },
+  {
+    "id": 563,
+    "name": "West Ham United FC",
+    "country": "England",
+    "league": "Championship",
+    "stadium": "London Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 715,
+    "name": "Cardiff City FC",
+    "country": "Wales",
+    "league": "Championship",
+    "stadium": "Cardiff City Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 1081,
+    "name": "Preston North End FC",
+    "country": "England",
+    "league": "Championship",
+    "stadium": "Deepdale Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 1126,
+    "name": "Lincoln City FC",
+    "country": "England",
+    "league": "Championship",
+    "stadium": "Sincil Bank Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 77,
+    "name": "Athletic Club",
+    "country": "Spain",
+    "league": "CL",
+    "stadium": "San Mamés",
+    "manager": "Unknown"
+  },
+  {
+    "id": 78,
+    "name": "Club Atlético de Madrid",
+    "country": "Spain",
+    "league": "CL",
+    "stadium": "Estadio Wanda Metropolitano",
+    "manager": "Unknown"
+  },
+  {
+    "id": 79,
+    "name": "CA Osasuna",
+    "country": "Spain",
+    "league": "Primera Division",
+    "stadium": "Estadio El Sadar",
+    "manager": "Unknown"
+  },
+  {
+    "id": 80,
+    "name": "RCD Espanyol de Barcelona",
+    "country": "Spain",
+    "league": "Primera Division",
+    "stadium": "RCDE Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 81,
+    "name": "FC Barcelona",
+    "country": "Spain",
+    "league": "CL",
+    "stadium": "Camp Nou",
+    "manager": "Unknown"
+  },
+  {
+    "id": 82,
+    "name": "Getafe CF",
+    "country": "Spain",
+    "league": "Primera Division",
+    "stadium": "Coliseum Alfonso Pérez",
+    "manager": "Unknown"
+  },
+  {
+    "id": 84,
+    "name": "Málaga CF",
+    "country": "Spain",
+    "league": "Primera Division",
+    "stadium": "Estadio La Rosaleda",
+    "manager": "Unknown"
+  },
+  {
+    "id": 86,
+    "name": "Real Madrid CF",
+    "country": "Spain",
+    "league": "CL",
+    "stadium": "Estadio Santiago Bernabéu",
+    "manager": "Unknown"
+  },
+  {
+    "id": 87,
+    "name": "Rayo Vallecano de Madrid",
+    "country": "Spain",
+    "league": "Primera Division",
+    "stadium": "Estadio del Rayo Vallecano",
+    "manager": "Unknown"
+  },
+  {
+    "id": 88,
+    "name": "Levante UD",
+    "country": "Spain",
+    "league": "Primera Division",
+    "stadium": "Estadio Ciudad de Valencia",
+    "manager": "Unknown"
+  },
+  {
+    "id": 90,
+    "name": "Real Betis Balompié",
+    "country": "Spain",
+    "league": "Primera Division",
+    "stadium": "Estadio Benito Villamarín",
+    "manager": "Unknown"
+  },
+  {
+    "id": 92,
+    "name": "Real Sociedad de Fútbol",
+    "country": "Spain",
+    "league": "Primera Division",
+    "stadium": "Estadio Municipal de Anoeta",
+    "manager": "Unknown"
+  },
+  {
+    "id": 94,
+    "name": "Villarreal CF",
+    "country": "Spain",
+    "league": "CL",
+    "stadium": "Estadio de la Cerámica",
+    "manager": "Unknown"
+  },
+  {
+    "id": 95,
+    "name": "Valencia CF",
+    "country": "Spain",
+    "league": "Primera Division",
+    "stadium": "Estadio de Mestalla",
+    "manager": "Unknown"
+  },
+  {
+    "id": 263,
+    "name": "Deportivo Alavés",
+    "country": "Spain",
+    "league": "Primera Division",
+    "stadium": "Estadio de Mendizorroza",
+    "manager": "Unknown"
+  },
+  {
+    "id": 285,
+    "name": "Elche CF",
+    "country": "Spain",
+    "league": "Primera Division",
+    "stadium": "Estadio Manuel Martínez Valero",
+    "manager": "Unknown"
+  },
+  {
+    "id": 558,
+    "name": "RC Celta de Vigo",
+    "country": "Spain",
+    "league": "Primera Division",
+    "stadium": "Estadio de Balaídos",
+    "manager": "Unknown"
+  },
+  {
+    "id": 559,
+    "name": "Sevilla FC",
+    "country": "Spain",
+    "league": "Primera Division",
+    "stadium": "Estadio Ramón Sánchez Pizjuán",
+    "manager": "Unknown"
+  },
+  {
+    "id": 560,
+    "name": "RC Deportivo La Coruña",
+    "country": "Spain",
+    "league": "Primera Division",
+    "stadium": "Estadio Abanca-Riazor",
+    "manager": "Unknown"
+  },
+  {
+    "id": 5335,
+    "name": "Real Racing Club de Santander",
+    "country": "Spain",
+    "league": "Primera Division",
+    "stadium": "Campos de Sport de El Sardinero",
+    "manager": "Unknown"
+  },
+  {
+    "id": 1,
+    "name": "1. FC Köln",
+    "country": "Germany",
+    "league": "Bundesliga",
+    "stadium": "RheinEnergieSTADION",
+    "manager": "Unknown"
+  },
+  {
+    "id": 2,
+    "name": "TSG 1899 Hoffenheim",
+    "country": "Germany",
+    "league": "Bundesliga",
+    "stadium": "PreZero Arena",
+    "manager": "Unknown"
+  },
+  {
+    "id": 3,
+    "name": "Bayer 04 Leverkusen",
+    "country": "Germany",
+    "league": "CL",
+    "stadium": "BayArena",
+    "manager": "Unknown"
+  },
+  {
+    "id": 4,
+    "name": "Borussia Dortmund",
+    "country": "Germany",
+    "league": "CL",
+    "stadium": "Signal Iduna Park",
+    "manager": "Unknown"
+  },
+  {
+    "id": 5,
+    "name": "FC Bayern München",
+    "country": "Germany",
+    "league": "CL",
+    "stadium": "Allianz Arena",
+    "manager": "Unknown"
+  },
+  {
+    "id": 6,
+    "name": "FC Schalke 04",
+    "country": "Germany",
+    "league": "Bundesliga",
+    "stadium": "Veltins-Arena",
+    "manager": "Unknown"
+  },
+  {
+    "id": 7,
+    "name": "Hamburger SV",
+    "country": "Germany",
+    "league": "Bundesliga",
+    "stadium": "Volksparkstadion",
+    "manager": "Unknown"
+  },
+  {
+    "id": 10,
+    "name": "VfB Stuttgart",
+    "country": "Germany",
+    "league": "Bundesliga",
+    "stadium": "Mercedes-Benz Arena",
+    "manager": "Unknown"
+  },
+  {
+    "id": 12,
+    "name": "SV Werder Bremen",
+    "country": "Germany",
+    "league": "Bundesliga",
+    "stadium": "Weserstadion",
+    "manager": "Unknown"
+  },
+  {
+    "id": 15,
+    "name": "1. FSV Mainz 05",
+    "country": "Germany",
+    "league": "Bundesliga",
+    "stadium": "Opel Arena",
+    "manager": "Unknown"
+  },
+  {
+    "id": 16,
+    "name": "FC Augsburg",
+    "country": "Germany",
+    "league": "Bundesliga",
+    "stadium": "WWK Arena",
+    "manager": "Unknown"
+  },
+  {
+    "id": 17,
+    "name": "SC Freiburg",
+    "country": "Germany",
+    "league": "Bundesliga",
+    "stadium": "Schwarzwald-Stadion",
+    "manager": "Unknown"
+  },
+  {
+    "id": 18,
+    "name": "Borussia Mönchengladbach",
+    "country": "Germany",
+    "league": "Bundesliga",
+    "stadium": "Stadion im Borussia-Park",
+    "manager": "Unknown"
+  },
+  {
+    "id": 19,
+    "name": "Eintracht Frankfurt",
+    "country": "Germany",
+    "league": "CL",
+    "stadium": "Deutsche Bank Park",
+    "manager": "Unknown"
+  },
+  {
+    "id": 28,
+    "name": "1. FC Union Berlin",
+    "country": "Germany",
+    "league": "Bundesliga",
+    "stadium": "Stadion An der Alten Försterei",
+    "manager": "Unknown"
+  },
+  {
+    "id": 29,
+    "name": "SC Paderborn 07",
+    "country": "Germany",
+    "league": "Bundesliga",
+    "stadium": "Benteler-Arena",
+    "manager": "Unknown"
+  },
+  {
+    "id": 719,
+    "name": "SV 07 Elversberg",
+    "country": "Germany",
+    "league": "Bundesliga",
+    "stadium": "Ursapharm-Arena an der Kaiserlinde",
+    "manager": "Unknown"
+  },
+  {
+    "id": 721,
+    "name": "RB Leipzig",
+    "country": "Germany",
+    "league": "Bundesliga",
+    "stadium": "Red Bull Arena",
+    "manager": "Unknown"
+  },
+  {
+    "id": 98,
+    "name": "AC Milan",
+    "country": "Italy",
+    "league": "Serie A",
+    "stadium": "Stadio Giuseppe Meazza",
+    "manager": "Ruben Amorim"
+  },
+  {
+    "id": 99,
+    "name": "ACF Fiorentina",
+    "country": "Italy",
+    "league": "Serie A",
+    "stadium": "Stadio Artemio Franchi",
+    "manager": "Fabio Grosso"
+  },
+  {
+    "id": 100,
+    "name": "AS Roma",
+    "country": "Italy",
+    "league": "Serie A",
+    "stadium": "Stadio Olimpico",
+    "manager": "Gian Piero Gasperini"
+  },
+  {
+    "id": 102,
+    "name": "Atalanta BC",
+    "country": "Italy",
+    "league": "CL",
+    "stadium": "Stadio Atleti Azzurri d'Italia",
+    "manager": "Maurizio Sarri"
+  },
+  {
+    "id": 103,
+    "name": "Bologna FC 1909",
+    "country": "Italy",
+    "league": "Serie A",
+    "stadium": "Stadio Renato Dall'Ara",
+    "manager": "Domenico Tedesco"
+  },
+  {
+    "id": 104,
+    "name": "Cagliari Calcio",
+    "country": "Italy",
+    "league": "Serie A",
+    "stadium": "Sardegna Arena",
+    "manager": "Fabio Pisacane"
+  },
+  {
+    "id": 107,
+    "name": "Genoa CFC",
+    "country": "Italy",
+    "league": "Serie A",
+    "stadium": "Stadio Comunale Luigi Ferraris",
+    "manager": "Daniele De Rossi"
+  },
+  {
+    "id": 108,
+    "name": "FC Internazionale Milano",
+    "country": "Italy",
+    "league": "CL",
+    "stadium": "Stadio Giuseppe Meazza",
+    "manager": "Cristian Chivu"
+  },
+  {
+    "id": 109,
+    "name": "Juventus FC",
+    "country": "Italy",
+    "league": "CL",
+    "stadium": "Allianz Stadium",
+    "manager": "Luciano Spalletti"
+  },
+  {
+    "id": 110,
+    "name": "SS Lazio",
+    "country": "Italy",
+    "league": "Serie A",
+    "stadium": "Stadio Olimpico",
+    "manager": "Gennaro Gattuso"
+  },
+  {
+    "id": 112,
+    "name": "Parma Calcio 1913",
+    "country": "Italy",
+    "league": "Serie A",
+    "stadium": "Stadio Ennio Tardini",
+    "manager": "Carlos Cuesta"
+  },
+  {
+    "id": 113,
+    "name": "SSC Napoli",
+    "country": "Italy",
+    "league": "CL",
+    "stadium": "Stadio San Paolo",
+    "manager": "Massimiliano Allegri"
+  },
+  {
+    "id": 115,
+    "name": "Udinese Calcio",
+    "country": "Italy",
+    "league": "Serie A",
+    "stadium": "Dacia Arena",
+    "manager": "Kosta Runjaić"
+  },
+  {
+    "id": 454,
+    "name": "Venezia FC",
+    "country": "Italy",
+    "league": "Serie A",
+    "stadium": "Stadio Pierluigi Penzo",
+    "manager": "Giovanni Stroppa"
+  },
+  {
+    "id": 470,
+    "name": "Frosinone Calcio",
+    "country": "Italy",
+    "league": "Serie A",
+    "stadium": "Stadio Benito Stirpe",
+    "manager": "Massimiliano Alvini"
+  },
+  {
+    "id": 471,
+    "name": "US Sassuolo Calcio",
+    "country": "Italy",
+    "league": "Serie A",
+    "stadium": "Mapei Stadium - Città del Tricolore",
+    "manager": "Alberto Aquilani"
+  },
+  {
+    "id": 586,
+    "name": "Torino FC",
+    "country": "Italy",
+    "league": "Serie A",
+    "stadium": "Stadio Olimpico di Torino",
+    "manager": "Ignazio Abate"
+  },
+  {
+    "id": 5890,
+    "name": "US Lecce",
+    "country": "Italy",
+    "league": "Serie A",
+    "stadium": "Stadio Comunale Via Del Mare",
+    "manager": "Eusebio Di Francesco"
+  },
+  {
+    "id": 5911,
+    "name": "AC Monza",
+    "country": "Italy",
+    "league": "Serie A",
+    "stadium": "Stadio Comunale Brianteo",
+    "manager": "Ivan Juric"
+  },
+  {
+    "id": 7397,
+    "name": "Como 1907",
+    "country": "Italy",
+    "league": "Serie A",
+    "stadium": "Stadio Giuseppe Sinigaglia",
+    "manager": "Fàbregas"
+  },
+  {
+    "id": 511,
+    "name": "Toulouse FC",
+    "country": "France",
+    "league": "Ligue 1",
+    "stadium": "Stadium Municipal",
+    "manager": "Unknown"
+  },
+  {
+    "id": 512,
+    "name": "Stade Brestois 29",
+    "country": "France",
+    "league": "Ligue 1",
+    "stadium": "Stade Francis-Le Blé",
+    "manager": "Unknown"
+  },
+  {
+    "id": 516,
+    "name": "Olympique de Marseille",
+    "country": "France",
+    "league": "CL",
+    "stadium": "Orange Vélodrome",
+    "manager": "Unknown"
+  },
+  {
+    "id": 519,
+    "name": "AJ Auxerre",
+    "country": "France",
+    "league": "Ligue 1",
+    "stadium": "Stade de l'Abbé Deschamps",
+    "manager": "Unknown"
+  },
+  {
+    "id": 521,
+    "name": "Lille OSC",
+    "country": "France",
+    "league": "Ligue 1",
+    "stadium": "Stade Pierre-Mauroy",
+    "manager": "Unknown"
+  },
+  {
+    "id": 522,
+    "name": "OGC Nice",
+    "country": "France",
+    "league": "Ligue 1",
+    "stadium": "Stade de Nice",
+    "manager": "Unknown"
+  },
+  {
+    "id": 523,
+    "name": "Olympique Lyonnais",
+    "country": "France",
+    "league": "Ligue 1",
+    "stadium": "Groupama Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 524,
+    "name": "Paris Saint-Germain FC",
+    "country": "France",
+    "league": "CL",
+    "stadium": "Parc des Princes",
+    "manager": "Unknown"
+  },
+  {
+    "id": 525,
+    "name": "FC Lorient",
+    "country": "France",
+    "league": "Ligue 1",
+    "stadium": "Stade Yves Allainmat - Le Moustoir",
+    "manager": "Unknown"
+  },
+  {
+    "id": 529,
+    "name": "Stade Rennais FC 1901",
+    "country": "France",
+    "league": "Ligue 1",
+    "stadium": "Roazhon Park",
+    "manager": "Unknown"
+  },
+  {
+    "id": 531,
+    "name": "ES Troyes AC",
+    "country": "France",
+    "league": "Ligue 1",
+    "stadium": "Stade de l'Aube",
+    "manager": "Unknown"
+  },
+  {
+    "id": 532,
+    "name": "Angers SCO",
+    "country": "France",
+    "league": "Ligue 1",
+    "stadium": "Stade Raymond Kopa",
+    "manager": "Unknown"
+  },
+  {
+    "id": 533,
+    "name": "Le Havre AC",
+    "country": "France",
+    "league": "Ligue 1",
+    "stadium": "Stade Océane",
+    "manager": "Unknown"
+  },
+  {
+    "id": 535,
+    "name": "Le Mans FC",
+    "country": "France",
+    "league": "Ligue 1",
+    "stadium": "MMArena",
+    "manager": "Unknown"
+  },
+  {
+    "id": 546,
+    "name": "Racing Club de Lens",
+    "country": "France",
+    "league": "Ligue 1",
+    "stadium": "Stade Bollaert-Delelis",
+    "manager": "Unknown"
+  },
+  {
+    "id": 548,
+    "name": "AS Monaco FC",
+    "country": "Monaco",
+    "league": "CL",
+    "stadium": "Stade Louis II.",
+    "manager": "Unknown"
+  },
+  {
+    "id": 576,
+    "name": "RC Strasbourg Alsace",
+    "country": "France",
+    "league": "Ligue 1",
+    "stadium": "Stade de la Meinau",
+    "manager": "Unknown"
+  },
+  {
+    "id": 1045,
+    "name": "Paris FC",
+    "country": "France",
+    "league": "Ligue 1",
+    "stadium": "Stade Sébastien Charléty",
+    "manager": "Unknown"
+  },
+  {
+    "id": 666,
+    "name": "FC Twente '65",
+    "country": "Netherlands",
+    "league": "Eredivisie",
+    "stadium": "De Grolsch Veste",
+    "manager": "Unknown"
+  },
+  {
+    "id": 670,
+    "name": "SBV Excelsior",
+    "country": "Netherlands",
+    "league": "Eredivisie",
+    "stadium": "Van Donge & De Roo Stadion",
+    "manager": "Unknown"
+  },
+  {
+    "id": 672,
+    "name": "Willem II Tilburg",
+    "country": "Netherlands",
+    "league": "Eredivisie",
+    "stadium": "Koning Willem II Stadion",
+    "manager": "Unknown"
+  },
+  {
+    "id": 673,
+    "name": "SC Heerenveen",
+    "country": "Netherlands",
+    "league": "Eredivisie",
+    "stadium": "Abe Lenstra Stadion",
+    "manager": "Unknown"
+  },
+  {
+    "id": 674,
+    "name": "PSV",
+    "country": "Netherlands",
+    "league": "CL",
+    "stadium": "Philips Stadion",
+    "manager": "Unknown"
+  },
+  {
+    "id": 675,
+    "name": "Feyenoord Rotterdam",
+    "country": "Netherlands",
+    "league": "Eredivisie",
+    "stadium": "Stadion Feijenoord",
+    "manager": "Unknown"
+  },
+  {
+    "id": 676,
+    "name": "FC Utrecht",
+    "country": "Netherlands",
+    "league": "Eredivisie",
+    "stadium": "Stadion Galgenwaard",
+    "manager": "Unknown"
+  },
+  {
+    "id": 677,
+    "name": "FC Groningen",
+    "country": "Netherlands",
+    "league": "Eredivisie",
+    "stadium": "Hitachi Capital Mobility Stadion",
+    "manager": "Unknown"
+  },
+  {
+    "id": 678,
+    "name": "AFC Ajax",
+    "country": "Netherlands",
+    "league": "CL",
+    "stadium": "Johan Cruyff ArenA",
+    "manager": "Unknown"
+  },
+  {
+    "id": 680,
+    "name": "ADO Den Haag",
+    "country": "Netherlands",
+    "league": "Eredivisie",
+    "stadium": "Cars Jeans Stadion",
+    "manager": "Unknown"
+  },
+  {
+    "id": 682,
+    "name": "AZ",
+    "country": "Netherlands",
+    "league": "Eredivisie",
+    "stadium": "AFAS Stadion",
+    "manager": "Unknown"
+  },
+  {
+    "id": 684,
+    "name": "PEC Zwolle",
+    "country": "Netherlands",
+    "league": "Eredivisie",
+    "stadium": "MAC³PARK Stadion",
+    "manager": "Unknown"
+  },
+  {
+    "id": 718,
+    "name": "Go Ahead Eagles",
+    "country": "Netherlands",
+    "league": "Eredivisie",
+    "stadium": "De Adelaarshorst",
+    "manager": "Unknown"
+  },
+  {
+    "id": 1909,
+    "name": "SC Cambuur-Leeuwarden",
+    "country": "Netherlands",
+    "league": "Eredivisie",
+    "stadium": "Cambuurstadion",
+    "manager": "Unknown"
+  },
+  {
+    "id": 1912,
+    "name": "Telstar 1963",
+    "country": "Netherlands",
+    "league": "Eredivisie",
+    "stadium": "Rabobank IJmond Stadion",
+    "manager": "Unknown"
+  },
+  {
+    "id": 1915,
+    "name": "NEC",
+    "country": "Netherlands",
+    "league": "Eredivisie",
+    "stadium": "Goffertstadion",
+    "manager": "Unknown"
+  },
+  {
+    "id": 1920,
+    "name": "Fortuna Sittard",
+    "country": "Netherlands",
+    "league": "Eredivisie",
+    "stadium": "Fortuna Sittard Stadion",
+    "manager": "Unknown"
+  },
+  {
+    "id": 6806,
+    "name": "Sparta Rotterdam",
+    "country": "Netherlands",
+    "league": "Eredivisie",
+    "stadium": "Sparta-Stadion Het Kasteel",
+    "manager": "Unknown"
+  },
+  {
+    "id": 496,
+    "name": "Rio Ave FC",
+    "country": "Portugal",
+    "league": "Primeira Liga",
+    "stadium": "Estádio do Rio Ave Futebol Clube",
+    "manager": "Unknown"
+  },
+  {
+    "id": 498,
+    "name": "Sporting Clube de Portugal",
+    "country": "Portugal",
+    "league": "CL",
+    "stadium": "Estádio José Alvalade",
+    "manager": "Unknown"
+  },
+  {
+    "id": 503,
+    "name": "FC Porto",
+    "country": "Portugal",
+    "league": "Primeira Liga",
+    "stadium": "Estádio Do Dragão",
+    "manager": "Unknown"
+  },
+  {
+    "id": 582,
+    "name": "GD Estoril Praia",
+    "country": "Portugal",
+    "league": "Primeira Liga",
+    "stadium": "Estádio António Coimbra da Mota",
+    "manager": "Unknown"
+  },
+  {
+    "id": 583,
+    "name": "Moreirense FC",
+    "country": "Portugal",
+    "league": "Primeira Liga",
+    "stadium": "P.D. Comendador Joaquim de Almeida Freitas",
+    "manager": "Unknown"
+  },
+  {
+    "id": 712,
+    "name": "FC Arouca",
+    "country": "Portugal",
+    "league": "Primeira Liga",
+    "stadium": "Estádio Municipal de Arouca",
+    "manager": "Unknown"
+  },
+  {
+    "id": 1903,
+    "name": "Sport Lisboa e Benfica",
+    "country": "Portugal",
+    "league": "CL",
+    "stadium": "Estádio do Sport Lisboa e Benfica",
+    "manager": "Unknown"
+  },
+  {
+    "id": 5527,
+    "name": "Académico de Viseu FC",
+    "country": "Portugal",
+    "league": "Primeira Liga",
+    "stadium": "Estádio Municipal do Fontelo",
+    "manager": "Unknown"
+  },
+  {
+    "id": 5529,
+    "name": "CD Nacional",
+    "country": "Portugal",
+    "league": "Primeira Liga",
+    "stadium": "Estádio da Madeira",
+    "manager": "Unknown"
+  },
+  {
+    "id": 5530,
+    "name": "CD Santa Clara",
+    "country": "Portugal",
+    "league": "Primeira Liga",
+    "stadium": "Cidade do Futebol",
+    "manager": "Unknown"
+  },
+  {
+    "id": 5531,
+    "name": "FC Famalicão",
+    "country": "Portugal",
+    "league": "Primeira Liga",
+    "stadium": "Estádio Municipal 22 de Junho",
+    "manager": "Unknown"
+  },
+  {
+    "id": 5533,
+    "name": "Gil Vicente FC",
+    "country": "Portugal",
+    "league": "Primeira Liga",
+    "stadium": "Estádio Cidade de Barcelos",
+    "manager": "Unknown"
+  },
+  {
+    "id": 5543,
+    "name": "Vitória SC",
+    "country": "Portugal",
+    "league": "Primeira Liga",
+    "stadium": "Estádio Dom Afonso Henriques",
+    "manager": "Unknown"
+  },
+  {
+    "id": 5575,
+    "name": "CS Marítimo",
+    "country": "Portugal",
+    "league": "Primeira Liga",
+    "stadium": "Estádio dos Barreiros",
+    "manager": "Unknown"
+  },
+  {
+    "id": 5613,
+    "name": "Sporting Clube de Braga",
+    "country": "Portugal",
+    "league": "Primeira Liga",
+    "stadium": "Estádio Municipal de Braga",
+    "manager": "Unknown"
+  },
+  {
+    "id": 6618,
+    "name": "Casa Pia AC",
+    "country": "Portugal",
+    "league": "Primeira Liga",
+    "stadium": "Estádio Pina Manique",
+    "manager": "Unknown"
+  },
+  {
+    "id": 7822,
+    "name": "FC Alverca",
+    "country": "Portugal",
+    "league": "Primeira Liga",
+    "stadium": "Campo Futebol Clube Alverca",
+    "manager": "Unknown"
+  },
+  {
+    "id": 9136,
+    "name": "CF Estrela da Amadora",
+    "country": "Portugal",
+    "league": "Primeira Liga",
+    "stadium": "Estádio Nacional",
+    "manager": "Unknown"
+  },
+  {
+    "id": 57,
+    "name": "Arsenal FC",
+    "country": "England",
+    "league": "Premier League",
+    "stadium": "Emirates Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 61,
+    "name": "Chelsea FC",
+    "country": "England",
+    "league": "Premier League",
+    "stadium": "Stamford Bridge",
+    "manager": "Unknown"
+  },
+  {
+    "id": 64,
+    "name": "Liverpool FC",
+    "country": "England",
+    "league": "Premier League",
+    "stadium": "Anfield",
+    "manager": "Unknown"
+  },
+  {
+    "id": 65,
+    "name": "Manchester City FC",
+    "country": "England",
+    "league": "Premier League",
+    "stadium": "Etihad Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 67,
+    "name": "Newcastle United FC",
+    "country": "England",
+    "league": "Premier League",
+    "stadium": "St. James' Park",
+    "manager": "Unknown"
+  },
+  {
+    "id": 73,
+    "name": "Tottenham Hotspur FC",
+    "country": "England",
+    "league": "Premier League",
+    "stadium": "Tottenham Hotspur Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 610,
+    "name": "Galatasaray SK",
+    "country": "Turkey",
+    "league": "CL",
+    "stadium": "Türk Telekom Arena",
+    "manager": "Unknown"
+  },
+  {
+    "id": 611,
+    "name": "Qarabağ Ağdam FK",
+    "country": "Azerbaijan",
+    "league": "CL",
+    "stadium": "Tofiq Bəhramov adına Respublika stadionu",
+    "manager": "Unknown"
+  },
+  {
+    "id": 654,
+    "name": "PAE Olympiakos SFP",
+    "country": "Greece",
+    "league": "CL",
+    "stadium": "Stadio Georgios Karaiskáki",
+    "manager": "Unknown"
+  },
+  {
+    "id": 851,
+    "name": "Club Brugge KV",
+    "country": "Belgium",
+    "league": "CL",
+    "stadium": "Jan Breydelstadion",
+    "manager": "Unknown"
+  },
+  {
+    "id": 930,
+    "name": "SK Slavia Praha",
+    "country": "Czech Republic",
+    "league": "CL",
+    "stadium": "Sinobo Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 1876,
+    "name": "FC København",
+    "country": "Denmark",
+    "league": "CL",
+    "stadium": "Telia Parken",
+    "manager": "Unknown"
+  },
+  {
+    "id": 3929,
+    "name": "Royale Union Saint-Gilloise",
+    "country": "Belgium",
+    "league": "CL",
+    "stadium": "Stade Joseph Mariën",
+    "manager": "Unknown"
+  },
+  {
+    "id": 5721,
+    "name": "FK Bodø/Glimt",
+    "country": "Norway",
+    "league": "CL",
+    "stadium": "Aspmyra Stadion",
+    "manager": "Unknown"
+  },
+  {
+    "id": 10601,
+    "name": "FK Kairat",
+    "country": "Kazakhstan",
+    "league": "CL",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 11034,
+    "name": "Paphos FC",
+    "country": "Cyprus",
+    "league": "CL",
+    "stadium": "Alphamega Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 1765,
+    "name": "Fluminense FC",
+    "country": "Brazil",
+    "league": "Campeonato Brasileiro Série A",
+    "stadium": "Estadio Jornalista Mário Filho",
+    "manager": "Luis Zubeldía"
+  },
+  {
+    "id": 1766,
+    "name": "CA Mineiro",
+    "country": "Brazil",
+    "league": "Campeonato Brasileiro Série A",
+    "stadium": "Estádio Raimundo Sampaio",
+    "manager": "Eduardo Domínguez"
+  },
+  {
+    "id": 1767,
+    "name": "Grêmio FBPA",
+    "country": "Brazil",
+    "league": "Campeonato Brasileiro Série A",
+    "stadium": "Arena do Grêmio",
+    "manager": "Jéssica Lima"
+  },
+  {
+    "id": 1768,
+    "name": "CA Paranaense",
+    "country": "Brazil",
+    "league": "Campeonato Brasileiro Série A",
+    "stadium": "Estádio Joaquim Américo Guimarães",
+    "manager": "João Eduardo Louro Baptista Cr"
+  },
+  {
+    "id": 1769,
+    "name": "SE Palmeiras",
+    "country": "Brazil",
+    "league": "Campeonato Brasileiro Série A",
+    "stadium": "Allianz Parque",
+    "manager": "Abel Ferreira"
+  },
+  {
+    "id": 1770,
+    "name": "Botafogo FR",
+    "country": "Brazil",
+    "league": "Campeonato Brasileiro Série A",
+    "stadium": "Estádio Nilton Santos",
+    "manager": "Franclim Carvalho"
+  },
+  {
+    "id": 1771,
+    "name": "Cruzeiro EC",
+    "country": "Brazil",
+    "league": "Campeonato Brasileiro Série A",
+    "stadium": "Estádio Governador Magalhães Pinto",
+    "manager": "Artur Jorge"
+  },
+  {
+    "id": 1772,
+    "name": "Chapecoense AF",
+    "country": "Brazil",
+    "league": "Campeonato Brasileiro Série A",
+    "stadium": "Arena Condá",
+    "manager": "Fábio Matias"
+  },
+  {
+    "id": 1776,
+    "name": "São Paulo FC",
+    "country": "Brazil",
+    "league": "Campeonato Brasileiro Série A",
+    "stadium": "Estádio do Morumbi",
+    "manager": "Dorival Júnior"
+  },
+  {
+    "id": 1777,
+    "name": "EC Bahia",
+    "country": "Brazil",
+    "league": "Campeonato Brasileiro Série A",
+    "stadium": "Estádio Governador Roberto Santos",
+    "manager": "Rogério Ceni"
+  },
+  {
+    "id": 1779,
+    "name": "SC Corinthians Paulista",
+    "country": "Brazil",
+    "league": "Campeonato Brasileiro Série A",
+    "stadium": "Neo Química Arena",
+    "manager": "Fernando Diniz"
+  },
+  {
+    "id": 1780,
+    "name": "CR Vasco da Gama",
+    "country": "Brazil",
+    "league": "Campeonato Brasileiro Série A",
+    "stadium": "Estádio Club de Regatas Vasco da Gama",
+    "manager": "Possato"
+  },
+  {
+    "id": 1782,
+    "name": "EC Vitória",
+    "country": "Brazil",
+    "league": "Campeonato Brasileiro Série A",
+    "stadium": "Estádio Manoel Barradas",
+    "manager": "Jair Ventura"
+  },
+  {
+    "id": 1783,
+    "name": "CR Flamengo",
+    "country": "Brazil",
+    "league": "Campeonato Brasileiro Série A",
+    "stadium": "Estadio Jornalista Mário Filho",
+    "manager": "Leonardo Jardim"
+  },
+  {
+    "id": 4241,
+    "name": "Coritiba FBC",
+    "country": "Brazil",
+    "league": "Campeonato Brasileiro Série A",
+    "stadium": "Estádio Major Antônio Couto Pereira",
+    "manager": "Fernando Seabra"
+  },
+  {
+    "id": 4286,
+    "name": "RB Bragantino",
+    "country": "Brazil",
+    "league": "Campeonato Brasileiro Série A",
+    "stadium": "Estádio Nabi Abi Chedid",
+    "manager": "Vágner Mancini"
+  },
+  {
+    "id": 4287,
+    "name": "Clube do Remo",
+    "country": "Brazil",
+    "league": "Campeonato Brasileiro Série A",
+    "stadium": "Estádio Estadual Jornalista Edgar Augusto Proença",
+    "manager": "Leo Condé"
+  },
+  {
+    "id": 4364,
+    "name": "Mirassol FC",
+    "country": "Brazil",
+    "league": "Campeonato Brasileiro Série A",
+    "stadium": "Estádio José Maria de Campos Maia",
+    "manager": "Rafael Guanaes"
+  },
+  {
+    "id": 6684,
+    "name": "SC Internacional",
+    "country": "Brazil",
+    "league": "Campeonato Brasileiro Série A",
+    "stadium": "Estádio José Pinheiro Borba",
+    "manager": "Leonardo Ramos"
+  },
+  {
+    "id": 6685,
+    "name": "Santos FC",
+    "country": "Brazil",
+    "league": "Campeonato Brasileiro Série A",
+    "stadium": "Estádio Urbano Caldeira",
+    "manager": "Cuca"
+  },
+  {
+    "id": 758,
+    "name": "Uruguay",
+    "country": "Uruguay",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 759,
+    "name": "Germany",
+    "country": "Germany",
+    "league": "EC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 760,
+    "name": "Spain",
+    "country": "Spain",
+    "league": "EC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 761,
+    "name": "Paraguay",
+    "country": "Paraguay",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 762,
+    "name": "Argentina",
+    "country": "Argentina",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 763,
+    "name": "Ghana",
+    "country": "Ghana",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 764,
+    "name": "Brazil",
+    "country": "Brazil",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 765,
+    "name": "Portugal",
+    "country": "Portugal",
+    "league": "EC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 766,
+    "name": "Japan",
+    "country": "Japan",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 769,
+    "name": "Mexico",
+    "country": "Mexico",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 770,
+    "name": "England",
+    "country": "England",
+    "league": "EC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 771,
+    "name": "United States",
+    "country": "United States",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 772,
+    "name": "South Korea",
+    "country": "South Korea",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 773,
+    "name": "France",
+    "country": "France",
+    "league": "EC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 774,
+    "name": "South Africa",
+    "country": "South Africa",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 778,
+    "name": "Algeria",
+    "country": "Algeria",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 779,
+    "name": "Australia",
+    "country": "Australia",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 783,
+    "name": "New Zealand",
+    "country": "New Zealand",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 788,
+    "name": "Switzerland",
+    "country": "Switzerland",
+    "league": "EC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 791,
+    "name": "Ecuador",
+    "country": "Ecuador",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 792,
+    "name": "Sweden",
+    "country": "Sweden",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 798,
+    "name": "Czechia",
+    "country": "Czech Republic",
+    "league": "EC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 799,
+    "name": "Croatia",
+    "country": "Croatia",
+    "league": "EC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 801,
+    "name": "Saudi Arabia",
+    "country": "Saudi Arabia",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 802,
+    "name": "Tunisia",
+    "country": "Tunisia",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 803,
+    "name": "Turkey",
+    "country": "Turkey",
+    "league": "EC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 804,
+    "name": "Senegal",
+    "country": "Senegal",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 805,
+    "name": "Belgium",
+    "country": "Belgium",
+    "league": "EC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 815,
+    "name": "Morocco",
+    "country": "Morocco",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 816,
+    "name": "Austria",
+    "country": "Austria",
+    "league": "EC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 818,
+    "name": "Colombia",
+    "country": "Colombia",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 825,
+    "name": "Egypt",
+    "country": "Egypt",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 828,
+    "name": "Canada",
+    "country": "Canada",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 836,
+    "name": "Haiti",
+    "country": "Haiti",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 840,
+    "name": "Iran",
+    "country": "Iran",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 1060,
+    "name": "Bosnia-Herzegovina",
+    "country": "Bosnia and Herzegovina",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 1836,
+    "name": "Panama",
+    "country": "Panama",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 1930,
+    "name": "Cape Verde Islands",
+    "country": "Cape Verde Islands",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 1934,
+    "name": "Congo DR",
+    "country": "Congo DR",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 1935,
+    "name": "Ivory Coast",
+    "country": "Ivory Coast",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 8030,
+    "name": "Qatar",
+    "country": "Qatar",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 8049,
+    "name": "Jordan",
+    "country": "Jordan",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 8062,
+    "name": "Iraq",
+    "country": "Iraq",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 8070,
+    "name": "Uzbekistan",
+    "country": "Uzbekistan",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 8601,
+    "name": "Netherlands",
+    "country": "Netherlands",
+    "league": "EC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 8872,
+    "name": "Norway",
+    "country": "Norway",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 8873,
+    "name": "Scotland",
+    "country": "Scotland",
+    "league": "EC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 9460,
+    "name": "Curaçao",
+    "country": "Curaçao",
+    "league": "WC",
+    "stadium": "Unknown",
+    "manager": "Unknown"
+  },
+  {
+    "id": 768,
+    "name": "Slovakia",
+    "country": "Slovakia",
+    "league": "EC",
+    "stadium": "City Arena Trnava",
+    "manager": "Unknown"
+  },
+  {
+    "id": 777,
+    "name": "Slovenia",
+    "country": "Slovenia",
+    "league": "EC",
+    "stadium": "Stadion Stožice",
+    "manager": "Unknown"
+  },
+  {
+    "id": 780,
+    "name": "Serbia",
+    "country": "Serbia",
+    "league": "EC",
+    "stadium": "Stadion Rajko Mitić",
+    "manager": "Unknown"
+  },
+  {
+    "id": 782,
+    "name": "Denmark",
+    "country": "Denmark",
+    "league": "EC",
+    "stadium": "Telia Parken",
+    "manager": "Unknown"
+  },
+  {
+    "id": 784,
+    "name": "Italy",
+    "country": "Italy",
+    "league": "EC",
+    "stadium": "Stadio Artemio Franchi",
+    "manager": "Unknown"
+  },
+  {
+    "id": 790,
+    "name": "Ukraine",
+    "country": "Ukraine",
+    "league": "EC",
+    "stadium": "NSK Olimpijs'kyj",
+    "manager": "Unknown"
+  },
+  {
+    "id": 794,
+    "name": "Poland",
+    "country": "Poland",
+    "league": "EC",
+    "stadium": "Stadion Energa Gdańsk",
+    "manager": "Unknown"
+  },
+  {
+    "id": 811,
+    "name": "Romania",
+    "country": "Romania",
+    "league": "EC",
+    "stadium": "Stadionul Ilie Oană",
+    "manager": "Unknown"
+  },
+  {
+    "id": 827,
+    "name": "Hungary",
+    "country": "Hungary",
+    "league": "EC",
+    "stadium": "Puskás Aréna",
+    "manager": "Unknown"
+  },
+  {
+    "id": 1065,
+    "name": "Albania",
+    "country": "Albania",
+    "league": "EC",
+    "stadium": "Air Albania Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 1978,
+    "name": "Georgia",
+    "country": "Georgia",
+    "league": "EC",
+    "stadium": "Boris Paichadzis Dinamo Arena",
+    "manager": "Unknown"
+  },
+  {
+    "id": 58,
+    "name": "Aston Villa FC",
+    "country": "England",
+    "league": "Premier League",
+    "stadium": "Villa Park",
+    "manager": "Unknown"
+  },
+  {
+    "id": 62,
+    "name": "Everton FC",
+    "country": "England",
+    "league": "Premier League",
+    "stadium": "Goodison Park",
+    "manager": "Unknown"
+  },
+  {
+    "id": 63,
+    "name": "Fulham FC",
+    "country": "England",
+    "league": "Premier League",
+    "stadium": "Craven Cottage",
+    "manager": "Unknown"
+  },
+  {
+    "id": 66,
+    "name": "Manchester United FC",
+    "country": "England",
+    "league": "Premier League",
+    "stadium": "Old Trafford",
+    "manager": "Unknown"
+  },
+  {
+    "id": 71,
+    "name": "Sunderland AFC",
+    "country": "England",
+    "league": "Premier League",
+    "stadium": "Stadium of Light",
+    "manager": "Unknown"
+  },
+  {
+    "id": 322,
+    "name": "Hull City AFC",
+    "country": "England",
+    "league": "Premier League",
+    "stadium": "Kingston Communications Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 341,
+    "name": "Leeds United FC",
+    "country": "England",
+    "league": "Premier League",
+    "stadium": "Elland Road",
+    "manager": "Unknown"
+  },
+  {
+    "id": 349,
+    "name": "Ipswich Town FC",
+    "country": "England",
+    "league": "Premier League",
+    "stadium": "Portman Road Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 351,
+    "name": "Nottingham Forest FC",
+    "country": "England",
+    "league": "Premier League",
+    "stadium": "The City Ground",
+    "manager": "Unknown"
+  },
+  {
+    "id": 354,
+    "name": "Crystal Palace FC",
+    "country": "England",
+    "league": "Premier League",
+    "stadium": "Selhurst Park",
+    "manager": "Unknown"
+  },
+  {
+    "id": 397,
+    "name": "Brighton & Hove Albion FC",
+    "country": "England",
+    "league": "Premier League",
+    "stadium": "The American Express Community Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 402,
+    "name": "Brentford FC",
+    "country": "England",
+    "league": "Premier League",
+    "stadium": "Griffin Park",
+    "manager": "Unknown"
+  },
+  {
+    "id": 1044,
+    "name": "AFC Bournemouth",
+    "country": "England",
+    "league": "Premier League",
+    "stadium": "Vitality Stadium",
+    "manager": "Unknown"
+  },
+  {
+    "id": 1076,
+    "name": "Coventry City FC",
+    "country": "England",
+    "league": "Premier League",
+    "stadium": "St Andrew's Trillion Trophy Stadium",
+    "manager": "Unknown"
+  }
 ]

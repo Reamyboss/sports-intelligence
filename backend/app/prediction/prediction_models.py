@@ -19,3 +19,5 @@ class PredictionResult(BaseModel):
     reasoning: ReasoningResult
 
     explanation: list[str]
+
+    summary: str

@@ -49,6 +49,8 @@ def build_reasoning(
     )
 
     return ReasoningResult(
+        home_team=evidence["home_team"]["name"],
+        away_team=evidence["away_team"]["name"],
         strengths=strengths,
         weaknesses=weaknesses,
         risks=risks,
