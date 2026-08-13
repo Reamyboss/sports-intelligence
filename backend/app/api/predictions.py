@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 
-from app.evidence.evidence_builder import build_evidence
+from app.evidence.evidence_builder import build_evidence, build_supporting_evidence
 from app.knowledge.knowledge_builder import build_match_profile
 from app.prediction.prediction_models import PredictionResult
 from app.prediction.prediction_service import run_prediction
@@ -36,7 +36,7 @@ def get_prediction(match_id: int) -> PredictionResult:
         kickoff=match.kickoff,
     )
 
-    supporting_evidence = []
+    supporting_evidence = build_supporting_evidence(evidence)
 
     prediction = run_prediction(
         evidence=evidence,

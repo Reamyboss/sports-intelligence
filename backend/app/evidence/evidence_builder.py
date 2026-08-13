@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from app.evidence.evidence_models import Evidence
 from app.evidence.form_evidence import get_recent_form
 from app.evidence.goal_evidence import get_goal_statistics
 from app.evidence.h2h_evidence import get_head_to_head
@@ -81,3 +82,145 @@ def build_evidence(
             exclude_match_id=match_id,
         ),
     }
+
+
+def build_supporting_evidence(evidence: dict) -> list[Evidence]:
+    """
+    Convert the evidence dict `build_evidence()` already produced into
+    structured Evidence objects. Introduces no new data source and no
+    new temporal risk - every value here traces directly to fields
+    already computed under the same before/exclude_match_id boundary.
+
+    A signal is only reported when there is a real difference to
+    report; ties and empty samples are omitted rather than reported
+    as a fabricated zero. `rest` is deliberately excluded - it is a
+    hardcoded placeholder (see rest_evidence.py), not real data, and
+    including it here would mean manufacturing evidence.
+    """
+
+    items: list[Evidence] = []
+
+    home = evidence["home_team"]
+    away = evidence["away_team"]
+    home_name = home["name"]
+    away_name = away["name"]
+
+    # --- Recent form ---
+    home_wins = home["form"].count("W")
+    away_wins = away["form"].count("W")
+
+    if (home["form"] or away["form"]) and home_wins != away_wins:
+        home_favoured = home_wins > away_wins
+        leader = home_name if home_favoured else away_name
+
+        items.append(
+            Evidence(
+                title="Recent Form",
+                supports="HOME" if home_favoured else "AWAY",
+                strength=float(abs(home_wins - away_wins)),
+                reason=(
+                    f"{leader} has more wins in recent matches "
+                    f"({home_wins} of {len(home['form'])} for {home_name} "
+                    f"vs {away_wins} of {len(away['form'])} for {away_name})."
+                ),
+            )
+        )
+
+    # --- Goals scored ---
+    home_avg = home["goals"]["avg_goals_scored"]
+    away_avg = away["goals"]["avg_goals_scored"]
+
+    if (
+        home["goals"]["matches"] > 0 or away["goals"]["matches"] > 0
+    ) and home_avg != away_avg:
+        home_favoured = home_avg > away_avg
+        leader = home_name if home_favoured else away_name
+
+        items.append(
+            Evidence(
+                title="Goals Scored",
+                supports="HOME" if home_favoured else "AWAY",
+                strength=round(abs(home_avg - away_avg), 2),
+                reason=(
+                    f"{leader} averages more goals scored "
+                    f"({home_avg:.2f} vs {away_avg:.2f})."
+                ),
+            )
+        )
+
+    # --- Head-to-head ---
+    h2h = evidence["head_to_head"]
+
+    if h2h["matches"] > 0 and h2h["home_wins"] != h2h["away_wins"]:
+        home_favoured = h2h["home_wins"] > h2h["away_wins"]
+        leader = home_name if home_favoured else away_name
+
+        items.append(
+            Evidence(
+                title="Head-to-Head",
+                supports="HOME" if home_favoured else "AWAY",
+                strength=float(abs(h2h["home_wins"] - h2h["away_wins"])),
+                reason=(
+                    f"{leader} leads the head-to-head record "
+                    f"({h2h['home_wins']}-{h2h['draws']}-{h2h['away_wins']} "
+                    f"in {h2h['matches']} meetings)."
+                ),
+            )
+        )
+
+    # --- Current streak ---
+    home_streak = home["streak"]
+    away_streak = away["streak"]
+
+    home_net = home_streak["winning_streak"] - home_streak["losing_streak"]
+    away_net = away_streak["winning_streak"] - away_streak["losing_streak"]
+
+    if (
+        home_streak["last_10_results"] or away_streak["last_10_results"]
+    ) and home_net != away_net:
+        home_favoured = home_net > away_net
+        leader = home_name if home_favoured else away_name
+
+        items.append(
+            Evidence(
+                title="Current Streak",
+                supports="HOME" if home_favoured else "AWAY",
+                strength=float(abs(home_net - away_net)),
+                reason=(
+                    f"{leader} is on a stronger current run (winning streak "
+                    f"{home_streak['winning_streak']} vs "
+                    f"{away_streak['winning_streak']}, losing streak "
+                    f"{home_streak['losing_streak']} vs "
+                    f"{away_streak['losing_streak']})."
+                ),
+            )
+        )
+
+    # --- Home/away context ---
+    home_at_home = home["home_away"]["home"]
+    away_at_away = away["home_away"]["away"]
+
+    home_at_home_played = sum(home_at_home.values())
+    away_at_away_played = sum(away_at_away.values())
+
+    if home_at_home_played > 0 and away_at_away_played > 0:
+        home_rate = home_at_home["wins"] / home_at_home_played
+        away_rate = away_at_away["wins"] / away_at_away_played
+
+        if home_rate != away_rate:
+            home_favoured = home_rate > away_rate
+            leader = home_name if home_favoured else away_name
+
+            items.append(
+                Evidence(
+                    title="Home/Away Record",
+                    supports="HOME" if home_favoured else "AWAY",
+                    strength=round(abs(home_rate - away_rate), 2),
+                    reason=(
+                        f"{home_name} win {home_rate:.0%} of home matches; "
+                        f"{away_name} win {away_rate:.0%} of away matches."
+                    ),
+                )
+            )
+
+    return items

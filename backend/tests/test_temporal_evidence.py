@@ -106,6 +106,12 @@ def test_predicting_an_already_finished_match_cannot_use_its_own_result(isolated
     assert home["streak"]["last_10_results"] == []
     assert home["home_away"]["home"] == {"wins": 0, "draws": 0, "losses": 0}
 
+    # With no real evidence, supporting_evidence must be an honest
+    # empty list, not fabricated Evidence objects.
+    from app.evidence.evidence_builder import build_supporting_evidence
+
+    assert build_supporting_evidence(evidence) == []
+
 
 def test_finished_match_used_for_evidence_of_a_later_match_but_not_itself(isolated_data):
     """
