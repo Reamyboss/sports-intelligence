@@ -11,7 +11,7 @@ class MatchProfile(BaseModel):
 
     home_advantage: bool
 
-    rest_days_home: int
-    rest_days_away: int
+    rest_days_home: int | None
+    rest_days_away: int | None
 
     head_to_head: dict
