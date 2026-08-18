@@ -27,23 +27,6 @@ def build_reasoning(
 
     contradictions = evaluate_contradictions(evidence)
 
-    confidence = 0.0
-
-    total_findings = (
-        len(strengths)
-        + len(opportunities)
-        - len(risks)
-        - len(weaknesses)
-    )
-
-    confidence = max(
-        0.0,
-        min(
-            100.0,
-            50 + (total_findings * 10),
-        ),
-    )
-
     summary = (
         "Reasoning completed successfully."
     )
@@ -56,7 +39,6 @@ def build_reasoning(
         risks=risks,
         opportunities=opportunities,
         contradictions=contradictions,
-        confidence=confidence,
         summary=summary,
         supporting_evidence=supporting_evidence,
     )

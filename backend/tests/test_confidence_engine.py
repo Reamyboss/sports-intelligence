@@ -18,7 +18,6 @@ def make_reasoning(
         risks=["r"] * risks,
         opportunities=["o"] * opportunities,
         contradictions=["c"] * contradictions,
-        confidence=50.0,
         summary="test",
         supporting_evidence=supporting_evidence or [],
     )

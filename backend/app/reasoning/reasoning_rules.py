@@ -64,6 +64,9 @@ def evaluate_risks(evidence: dict) -> list[str]:
     if evidence["away_team"]["form"].count("W") >= 3:
         risks.append("Away team arrives in strong form.")
 
+    if evidence["head_to_head"]["away_wins"] > evidence["head_to_head"]["home_wins"]:
+        risks.append("Historical head-to-head favors the away team.")
+
     away_win_rate = _win_rate(evidence["away_team"].get("home_away", {}).get("away"))
     if away_win_rate is not None and away_win_rate >= STRONG_AWAY_WIN_RATE:
         risks.append("Away team has a strong away-performance record.")

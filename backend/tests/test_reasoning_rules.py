@@ -123,6 +123,30 @@ def test_risk_absent_when_away_form_weak():
     assert evaluate_risks(evidence) == []
 
 
+def test_risk_flags_favourable_head_to_head_for_away_team():
+    """
+    Symmetric counterpart to test_opportunity_flags_favourable_head_to_head:
+    reasoning_rules.py previously had a rule for h2h favoring HOME
+    (an opportunity) but none for h2h favoring AWAY, so that evidence
+    was silently invisible in reasoning output. See the Newcastle vs
+    Liverpool case in the reasoning-depth audit.
+    """
+
+    evidence = make_evidence(home_wins=1, away_wins=4)
+
+    risks = evaluate_risks(evidence)
+
+    assert "Historical head-to-head favors the away team." in risks
+
+
+def test_risk_absent_for_head_to_head_when_home_favoured_or_even():
+    evidence = make_evidence(home_wins=3, away_wins=1)
+
+    risks = evaluate_risks(evidence)
+
+    assert "Historical head-to-head favors the away team." not in risks
+
+
 def test_opportunity_flags_favourable_head_to_head():
     evidence = make_evidence(home_wins=4, away_wins=1)
 

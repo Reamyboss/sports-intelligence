@@ -43,6 +43,21 @@ def _per_class_accuracy(predictions: list[str], actuals: list[str]) -> dict:
     return out
 
 
+def _trivial_baseline_accuracy(actuals: list[str], always_class: str) -> float:
+    """
+    Accuracy of predicting `always_class` for every single match,
+    regardless of any evidence - the simplest possible strategy, used
+    as a sanity floor the real system must clear.
+    """
+
+    if not actuals:
+        return 0.0
+
+    correct = sum(1 for a in actuals if a == always_class)
+
+    return round(correct / len(actuals) * 100, 2)
+
+
 def _distribution(predictions: list[str]) -> dict:
     total = len(predictions)
     counts = Counter(predictions)
@@ -101,6 +116,12 @@ class Metrics:
     baseline_distribution: dict
     current_distribution: dict
 
+    always_home_accuracy: float
+    always_away_accuracy: float
+    always_draw_accuracy: float
+    majority_class: str
+    majority_class_accuracy: float
+
     changed_count: int
     changed_became_correct: int
     changed_became_incorrect: int
@@ -147,6 +168,18 @@ def compute_metrics(results: list[BacktestResult]) -> Metrics:
 
     competitions = dict(Counter(r.competition for r in results))
 
+    always_home_accuracy = _trivial_baseline_accuracy(actuals, "HOME")
+    always_away_accuracy = _trivial_baseline_accuracy(actuals, "AWAY")
+    always_draw_accuracy = _trivial_baseline_accuracy(actuals, "DRAW")
+
+    actual_counts = Counter(actuals)
+    majority_class = max(CLASSES, key=lambda cls: actual_counts.get(cls, 0)) if total else "HOME"
+    majority_class_accuracy = {
+        "HOME": always_home_accuracy,
+        "AWAY": always_away_accuracy,
+        "DRAW": always_draw_accuracy,
+    }[majority_class]
+
     return Metrics(
         total=total,
         competitions=competitions,
@@ -156,6 +189,11 @@ def compute_metrics(results: list[BacktestResult]) -> Metrics:
         current_per_class=_per_class_accuracy(current_preds, actuals),
         baseline_distribution=_distribution(baseline_preds),
         current_distribution=_distribution(current_preds),
+        always_home_accuracy=always_home_accuracy,
+        always_away_accuracy=always_away_accuracy,
+        always_draw_accuracy=always_draw_accuracy,
+        majority_class=majority_class,
+        majority_class_accuracy=majority_class_accuracy,
         changed_count=len(changed),
         changed_became_correct=became_correct,
         changed_became_incorrect=became_incorrect,
@@ -218,6 +256,12 @@ def format_report(m: Metrics) -> str:
     lines.append(f"Per-class (current):  {m.current_per_class}")
     lines.append(f"Distribution (baseline): {m.baseline_distribution}")
     lines.append(f"Distribution (current):  {m.current_distribution}")
+    lines.append("")
+    lines.append("Trivial baselines (no evidence, same prediction every match):")
+    lines.append(f"  always HOME: {m.always_home_accuracy}%")
+    lines.append(f"  always AWAY: {m.always_away_accuracy}%")
+    lines.append(f"  always DRAW: {m.always_draw_accuracy}%")
+    lines.append(f"  majority class in dataset: {m.majority_class} ({m.majority_class_accuracy}%)")
     lines.append("")
     lines.append(f"Changed predictions: {m.changed_count}")
     lines.append(f"  became correct:   {m.changed_became_correct}")

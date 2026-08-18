@@ -22,8 +22,6 @@ class ReasoningResult(BaseModel):
 
     contradictions: list[str]
 
-    confidence: float
-
     summary: str
 
     supporting_evidence: list[Evidence]
