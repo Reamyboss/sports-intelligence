@@ -8,6 +8,7 @@ import type { Match, MatchProfile, PredictionResult } from '../api/types'
 import { MatchHeader } from '../components/MatchHeader'
 import { MatchIntelligence } from '../components/MatchIntelligence'
 import { DecisionDrivers } from '../components/DecisionDrivers'
+import { PredictionCaveat } from '../components/PredictionCaveat'
 import { EvidenceBreakdown } from '../components/EvidenceBreakdown'
 import { PredictionSummary } from '../components/PredictionSummary'
 import { KeyFactors } from '../components/KeyFactors'
@@ -92,6 +93,7 @@ export function MatchDetailPage() {
         <div className="space-y-4">
           <MatchHeader match={state.data.match} />
           <PredictionSummary prediction={state.data.prediction} />
+          <PredictionCaveat />
           <DecisionDrivers prediction={state.data.prediction} />
           <EvidenceBreakdown prediction={state.data.prediction} />
           <MatchIntelligence profile={state.data.profile} />

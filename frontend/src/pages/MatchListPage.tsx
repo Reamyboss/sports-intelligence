@@ -82,7 +82,7 @@ export function MatchListPage() {
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--text-muted)] sm:text-base">
           Every prediction here is built from real, finished matches - form, goals, head-to-head,
           streaks and home/away records - and shows you the evidence it used. Pick a match to see
-          what we think, and why.
+          what we think, and why. It is experimental: the evidence is the point, not the verdict.
         </p>
 
         {state.status === 'ready' && (
