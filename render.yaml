@@ -1,0 +1,50 @@
+# Deployment configuration, in version control.
+#
+# The two live services were created through the Render dashboard, so
+# their settings existed nowhere in this repository - including the one
+# that matters here: ENVIRONMENT is unset on the API, which is why the
+# live health endpoint reports itself as "development".
+#
+# Adding this file does not reconfigure the running services. Render
+# applies a blueprint only to services created from one, so this is
+# inert until adopted deliberately. Until then it serves as the record
+# of how the deployment is meant to be configured - and the API's
+# ENVIRONMENT still needs setting to "production" in the dashboard.
+#
+# FOOTBALL_DATA_API_KEY is deliberately marked sync: false so the
+# secret is entered in the dashboard and never committed here.
+
+services:
+  - type: web
+    name: sports-intelligence-api
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      # PYTHON_VERSION is deliberately not pinned here: the running
+      # service's version is set in the dashboard and pinning a
+      # different one from this file would silently change the
+      # runtime under the deployment.
+      - key: FOOTBALL_DATA_API_KEY
+        sync: false
+
+  - type: web
+    name: sports-intelligence-svpl
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://sports-intelligence-api.onrender.com
+    routes:
+      # Single-page app: React Router owns the paths, so every unknown
+      # path must serve index.html rather than 404.
+      - type: rewrite
+        source: /*
+        destination: /index.html
