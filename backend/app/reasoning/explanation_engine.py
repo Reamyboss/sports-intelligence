@@ -1,4 +1,11 @@
+from app.evidence.evidence_models import Evidence
 from app.reasoning.reasoning_models import ReasoningResult
+from app.reasoning.signal_ranking import (
+    conflict_level,
+    rank_signals,
+    split_by_side,
+    strongest,
+)
 
 
 def explain(result: ReasoningResult) -> list[str]:
@@ -76,6 +83,34 @@ def _reason_clause(text: str, home_team: str, away_team: str) -> str:
     return _lowercase_first(personalized)
 
 
+def _lead_clause(
+    signal: Evidence | None,
+    fallback_rules: list[str],
+    reasoning: ReasoningResult,
+) -> str:
+    """
+    The clause the narrative should lead with.
+
+    Prefers the strongest ranked evidence, whose `reason` already
+    names the clubs and quotes the actual figures. Falls back to
+    reasoning_rules.py's generic strings only when there is no ranked
+    evidence at all - which keeps matches with no real evidence (and
+    every test built on them) behaving exactly as before.
+    """
+
+    if signal is not None:
+        return _reason_clause(
+            signal.reason, reasoning.home_team, reasoning.away_team
+        )
+
+    if fallback_rules:
+        return _reason_clause(
+            fallback_rules[0], reasoning.home_team, reasoning.away_team
+        )
+
+    return ""
+
+
 def summarize(
     winner: str,
     probability: float,
@@ -88,7 +123,16 @@ def summarize(
     built entirely from the same structured reasoning behind the
     numeric result (no information is introduced here that isn't
     already in `reasoning`).
+
+    The lead reason is the *strongest* evidence for the call, ranked
+    by the magnitude the evidence engine computed. It used to be
+    whichever rule happened to be written first in reasoning_rules.py,
+    so a 0.1 goal differential could be quoted as the headline reason
+    while a 5.0 streak differential went unmentioned.
     """
+
+    ranked = rank_signals(reasoning.supporting_evidence)
+    supporting, opposing = split_by_side(ranked, winner)
 
     pro_home = reasoning.strengths + reasoning.opportunities
     pro_away = reasoning.weaknesses + reasoning.risks
@@ -100,28 +144,27 @@ def summarize(
             f"{reasoning.home_team} and {reasoning.away_team} look "
             "evenly matched, with no side holding a clear edge."
         )
-        counter_reasons = pro_home + pro_away
+        counter_rules = pro_home + pro_away
     else:
         if winner == "HOME":
-            favoured, leading_reasons, counter_reasons = (
+            favoured, leading_rules, counter_rules = (
                 reasoning.home_team,
                 pro_home,
                 pro_away,
             )
         else:
-            favoured, leading_reasons, counter_reasons = (
+            favoured, leading_rules, counter_rules = (
                 reasoning.away_team,
                 pro_away,
                 pro_home,
             )
 
-        if leading_reasons:
-            reason = _reason_clause(
-                leading_reasons[0], reasoning.home_team, reasoning.away_team
-            )
+        lead = _lead_clause(strongest(supporting), leading_rules, reasoning)
+
+        if lead:
             sentences.append(
                 f"{favoured} are {_favour_strength(probability)} "
-                f"favoured because {reason}."
+                f"favoured because {lead}."
             )
         else:
             sentences.append(
@@ -129,12 +172,17 @@ def summarize(
                 "evidence is thin."
             )
 
-    if counter_reasons:
-        reason = _reason_clause(
-            counter_reasons[0], reasoning.home_team, reasoning.away_team
-        )
+    counter = _lead_clause(strongest(opposing), counter_rules, reasoning)
+
+    if counter:
         sentences.append(
-            f"However, {reason}, which creates meaningful uncertainty."
+            f"However, {counter}, which creates meaningful uncertainty."
+        )
+
+    if conflict_level(ranked) == "HIGH":
+        sentences.append(
+            "The evidence on both sides is close to equally strong, so "
+            "this call could reasonably go the other way."
         )
 
     if reasoning.contradictions:

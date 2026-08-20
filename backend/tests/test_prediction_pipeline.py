@@ -1,3 +1,5 @@
+import pytest
+
 from app.evidence.evidence_builder import build_evidence
 from app.evidence.goal_evidence import get_goal_statistics
 from app.knowledge.knowledge_builder import build_match_profile
@@ -20,8 +22,21 @@ def test_full_pipeline_produces_a_structurally_valid_prediction(real_match_id):
     evidence = build_evidence(profile, match_id=match.id, kickoff=match.kickoff)
     result = run_prediction(evidence=evidence, supporting_evidence=[])
 
+    by_outcome = {
+        "HOME": result.home_probability,
+        "DRAW": result.draw_probability,
+        "AWAY": result.away_probability,
+    }
+
     assert result.winner in ("HOME", "AWAY", "DRAW")
-    assert 40.0 <= result.probability <= 90.0
+
+    # The reported probability is the predicted outcome's own share,
+    # and it is the largest of the three - not a home-lean index that
+    # happens to sit in a fixed band.
+    assert result.probability == by_outcome[result.winner]
+    assert result.probability == max(by_outcome.values())
+    assert sum(by_outcome.values()) == pytest.approx(100.0, abs=0.05)
+
     assert 0.0 <= result.confidence <= 100.0
     assert result.market == "MATCH_WINNER"
     assert isinstance(result.explanation, list)
