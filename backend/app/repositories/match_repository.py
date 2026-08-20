@@ -77,9 +77,25 @@ class MatchRepository:
         own prediction.
         """
 
-        combined = (
-            self.get_all_matches()
-            + self.get_all_historical_matches()
+        # Deduplicate by id before anything else. The two files are
+        # not disjoint: every completed Champions League fixture is
+        # written to both matches.json (as a current-season fixture)
+        # and historical_matches.json (as a completed match), so a
+        # plain concatenation counted all 189 of them twice. That
+        # inflated form, goals, streak and head-to-head evidence for
+        # 36 clubs - up to a quarter of a top side's entire history -
+        # and, because those are exactly Europe's strongest teams, it
+        # skewed the evidence for the matches that matter most.
+        # The duplicate rows are byte-identical in teams, scores and
+        # dates, so keeping the first occurrence loses nothing.
+        combined = list(
+            {
+                match["id"]: match
+                for match in (
+                    self.get_all_matches()
+                    + self.get_all_historical_matches()
+                )
+            }.values()
         )
 
         finished = [
