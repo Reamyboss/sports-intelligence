@@ -1,4 +1,4 @@
-from app.collectors.normalizer import normalize_team
+from app.collectors.normalizer import normalize_status, normalize_team
 from app.providers.football_data_provider import FootballDataProvider
 from app.repositories.match_repository import MatchRepository
 from app.repositories.team_repository import TeamRepository
@@ -16,6 +16,9 @@ class SyncService:
         matches = []
 
         for match in matches_payload:
+            home_score = match["score"]["fullTime"]["home"]
+            away_score = match["score"]["fullTime"]["away"]
+
             matches.append(
                 {
                     "id": match["id"],
@@ -23,11 +26,15 @@ class SyncService:
                     "season": int(match["season"]["startDate"][:4]),
                     "matchday": match.get("matchday"),
                     "kickoff": match["utcDate"],
-                    "status": match["status"].lower(),
+                    "status": normalize_status(
+                        match["status"],
+                        home_score,
+                        away_score,
+                    ),
                     "home_team": match["homeTeam"]["name"],
                     "away_team": match["awayTeam"]["name"],
-                    "home_score": match["score"]["fullTime"]["home"],
-                    "away_score": match["score"]["fullTime"]["away"],
+                    "home_score": home_score,
+                    "away_score": away_score,
                 }
             )
 

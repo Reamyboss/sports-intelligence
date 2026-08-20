@@ -17,6 +17,57 @@ def normalize_fixture(data: dict) -> Match:
     )
 
 
+# The match states football-data.org documents. Anything outside this
+# set is upstream corruption, not a state we should store.
+KNOWN_STATUSES = {
+    "scheduled",
+    "timed",
+    "in_play",
+    "paused",
+    "finished",
+    "postponed",
+    "suspended",
+    "cancelled",
+    "awarded",
+}
+
+
+def normalize_status(raw_status, home_score=None, away_score=None) -> str:
+    """
+    Guard the ingestion boundary against a malformed upstream `status`.
+
+    football-data.org intermittently returns the fixture's kick-off
+    timestamp in this field instead of a state - observed on 54
+    Primeira Liga and 1 Brasileirao fixtures, e.g.
+    `"status": "2026-08-22 14:30:00Z"`. Re-syncing cannot fix it
+    because the defect is in the source payload, so it has to be
+    caught here.
+
+    Storing the raw value is the dangerous option: `status` is what
+    decides whether a match becomes historical evidence, and a garbage
+    value silently means "never finished, never counted" - the result
+    would never feed back into the engine even after the match is
+    played.
+
+    A full-time score line is the only reliable evidence that a match
+    has actually been played, so that (and nothing else) promotes an
+    unrecognised status to "finished". Everything else falls back to
+    "scheduled", which is the safe direction: a fixture wrongly marked
+    scheduled is merely invisible, whereas one wrongly marked finished
+    would inject a fabricated result into the evidence base.
+    """
+
+    status = str(raw_status or "").strip().lower()
+
+    if status in KNOWN_STATUSES:
+        return status
+
+    if home_score is not None and away_score is not None:
+        return "finished"
+
+    return "scheduled"
+
+
 def normalize_match(raw_match: dict) -> dict:
     """
     Normalize a Football-Data.org match into the
