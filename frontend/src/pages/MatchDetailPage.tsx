@@ -7,6 +7,7 @@ import { ApiError } from '../api/client'
 import type { Match, MatchProfile, PredictionResult } from '../api/types'
 import { MatchHeader } from '../components/MatchHeader'
 import { MatchIntelligence } from '../components/MatchIntelligence'
+import { DecisionDrivers } from '../components/DecisionDrivers'
 import { EvidenceBreakdown } from '../components/EvidenceBreakdown'
 import { PredictionSummary } from '../components/PredictionSummary'
 import { KeyFactors } from '../components/KeyFactors'
@@ -85,9 +86,13 @@ export function MatchDetailPage() {
       )}
 
       {state.status === 'ready' && (
+        // Ordered the way a reader needs it: the match, then the
+        // call and its numbers, then why, then what could change it,
+        // and only last what the system does and doesn't know.
         <div className="space-y-4">
           <MatchHeader match={state.data.match} />
           <PredictionSummary prediction={state.data.prediction} />
+          <DecisionDrivers prediction={state.data.prediction} />
           <EvidenceBreakdown prediction={state.data.prediction} />
           <MatchIntelligence profile={state.data.profile} />
           <KeyFactors

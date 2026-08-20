@@ -57,17 +57,47 @@ export interface ReasoningResult {
   risks: string[]
   opportunities: string[]
   contradictions: string[]
-  confidence: number
   summary: string
   supporting_evidence: Evidence[]
 }
 
+/** How genuinely the evidence disagrees with itself. */
+export type ConflictLevel = 'NONE' | 'LOW' | 'MODERATE' | 'HIGH'
+
 export interface PredictionResult {
   winner: PredictionWinner
+  /**
+   * The probability of `winner` specifically - always equal to
+   * whichever of the three below matches it. It used to be a
+   * home-lean index reported for every outcome, so an away pick
+   * displayed the home team's number.
+   */
   probability: number
+  home_probability: number
+  draw_probability: number
+  away_probability: number
   confidence: number
   market: string
+  /** Strongest signal behind the call, ranked by evidence strength. */
+  strongest_support: Evidence | null
+  /** Strongest signal against it. */
+  strongest_opposition: Evidence | null
+  conflict: ConflictLevel
   reasoning: ReasoningResult
   explanation: string[]
   summary: string
+}
+
+export type CompetitionAvailability = 'ACTIVE' | 'NO_UPCOMING_FIXTURES' | 'EMPTY'
+
+export interface Competition {
+  name: string
+  season: number | null
+  availability: CompetitionAvailability
+  total_matches: number
+  played_matches: number
+  upcoming_matches: number
+  next_kickoff: string | null
+  last_kickoff: string | null
+  prediction_ready: boolean
 }
