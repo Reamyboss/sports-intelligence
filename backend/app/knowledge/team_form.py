@@ -1,48 +1,22 @@
-from app.repositories.match_repository import MatchRepository
+from datetime import datetime
+
+from app.evidence.form_evidence import get_recent_form
 
 
-repository = MatchRepository()
+def get_team_form(
+    team_name: str,
+    before: datetime | None = None,
+    exclude_match_id: int | None = None,
+) -> list[str]:
+    """
+    Real recent form, delegating to the same temporal-safe evidence-
+    layer implementation the prediction pipeline uses - not a second,
+    independent computation that (without a before/exclude_match_id
+    boundary) could show results from after the match it's describing.
+    """
 
-
-def get_team_form(team_name: str) -> list[str]:
-    matches = repository.get_finished_matches_by_team(team_name)
-
-    matches.sort(
-        key=lambda match: match["kickoff"],
-        reverse=True,
+    return get_recent_form(
+        team_name,
+        before=before,
+        exclude_match_id=exclude_match_id,
     )
-
-    recent_matches = matches[:5]
-
-    form = []
-
-    for match in recent_matches:
-
-        home = match["home_team"] == team_name
-
-        home_score = match["home_score"]
-        away_score = match["away_score"]
-
-        if home:
-
-            if home_score > away_score:
-                form.append("W")
-
-            elif home_score < away_score:
-                form.append("L")
-
-            else:
-                form.append("D")
-
-        else:
-
-            if away_score > home_score:
-                form.append("W")
-
-            elif away_score < home_score:
-                form.append("L")
-
-            else:
-                form.append("D")
-
-    return form

@@ -102,7 +102,7 @@ def normalize_match(raw_match: dict) -> dict:
         "season": season,
         "matchday": raw_match["matchday"],
         "utc_date": raw_match["utcDate"],
-        "status": raw_match["status"],
+        "status": normalize_status(raw_match["status"], home_score, away_score),
         "home_team_id": raw_match["homeTeam"]["id"],
         "home_team": raw_match["homeTeam"]["name"],
         "away_team_id": raw_match["awayTeam"]["id"],

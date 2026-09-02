@@ -24,15 +24,10 @@ export const SCORED_FACTORS: FactorDefinition[] = [
   { key: 'Home/Away Record', label: 'Home/away record' },
   { key: 'Current Streak', label: 'Current streak' },
   { key: 'Head-to-Head', label: 'Head-to-head history' },
+  { key: 'Rest Days', label: 'Rest days' },
 ].map((f) => ({ ...f, available: true }))
 
 export const UNAVAILABLE_FACTORS: FactorDefinition[] = [
-  {
-    key: 'Rest',
-    label: 'Rest days',
-    available: false,
-    note: 'Shown in match intelligence above - real, but not yet factored into the prediction itself.',
-  },
   { key: 'Travel', label: 'Travel distance', available: false },
   { key: 'Fatigue', label: 'Fixture congestion / fatigue', available: false },
   { key: 'Weather', label: 'Weather', available: false },
