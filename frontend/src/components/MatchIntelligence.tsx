@@ -48,13 +48,7 @@ export function MatchIntelligence({ profile }: MatchIntelligenceProps) {
         <FormRow label={profile.away_team} form={profile.away_form} />
       </div>
 
-      <dl className="mt-5 grid grid-cols-2 gap-4 border-t border-[var(--border)] pt-4 sm:grid-cols-3">
-        <div>
-          <dt className="text-xs text-[var(--text-muted)]">Home advantage</dt>
-          <dd className="mt-0.5 text-sm font-medium text-[var(--text)]">
-            {profile.home_advantage ? 'Yes' : 'No'}
-          </dd>
-        </div>
+      <dl className="mt-5 grid grid-cols-2 gap-4 border-t border-[var(--border)] pt-4">
         <div>
           <dt className="text-xs text-[var(--text-muted)]">Rest days</dt>
           <dd className="mt-0.5 text-sm font-medium text-[var(--text)]">

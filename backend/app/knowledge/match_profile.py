@@ -9,8 +9,6 @@ class MatchProfile(BaseModel):
     home_form: list[str]
     away_form: list[str]
 
-    home_advantage: bool
-
     rest_days_home: int | None
     rest_days_away: int | None
 

@@ -25,6 +25,8 @@ def make_evidence(
     home_home_played=0,
     away_away_wins=0,
     away_away_played=0,
+    home_rest_days=None,
+    away_rest_days=None,
     home_name="Home FC",
     away_name="Away FC",
 ):
@@ -54,7 +56,7 @@ def make_evidence(
                 "winless_streak": 0,
                 "last_10_results": home_last_10 or [],
             },
-            "rest": {"days_rest": None},
+            "rest_days": home_rest_days,
         },
         "away_team": {
             "name": away_name,
@@ -77,7 +79,7 @@ def make_evidence(
                 "winless_streak": 0,
                 "last_10_results": away_last_10 or [],
             },
-            "rest": {"days_rest": None},
+            "rest_days": away_rest_days,
         },
         "head_to_head": {
             "matches": h2h_matches,
@@ -194,20 +196,38 @@ def test_zero_head_to_head_history_is_omitted_not_reported_as_zero():
     assert [i for i in items if i.title == "Head-to-Head"] == []
 
 
-def test_rest_never_appears_in_supporting_evidence():
-    """
-    rest_evidence.py is a hardcoded placeholder with no real data -
-    including it here would mean fabricating evidence.
-    """
+def test_rest_days_difference_produces_evidence_supporting_the_leader():
+    evidence = make_evidence(home_rest_days=6, away_rest_days=2)
 
-    evidence = make_evidence(
-        home_form=["W", "W", "W"], away_form=["L", "L", "L"],
-    )
+    items = build_supporting_evidence(evidence)
+    rest_items = [i for i in items if i.title == "Rest Days"]
+
+    assert len(rest_items) == 1
+    assert rest_items[0].supports == "HOME"
+    assert rest_items[0].strength == 4.0
+    assert "Home FC" in rest_items[0].reason
+
+
+def test_rest_days_tied_produces_no_evidence():
+    evidence = make_evidence(home_rest_days=4, away_rest_days=4)
 
     items = build_supporting_evidence(evidence)
 
     assert all(i.title != "Rest Days" for i in items)
-    assert all("rest" not in i.title.lower() for i in items)
+
+
+def test_rest_days_missing_for_either_team_produces_no_evidence():
+    """
+    A team with no prior qualifying match has rest_days=None - that
+    must never be treated as 0 days rest, so no signal is reported
+    rather than a fabricated comparison.
+    """
+
+    evidence = make_evidence(home_rest_days=None, away_rest_days=5)
+
+    items = build_supporting_evidence(evidence)
+
+    assert all(i.title != "Rest Days" for i in items)
 
 
 # -----------------------------

@@ -30,7 +30,6 @@ export interface MatchProfile {
   away_team: string
   home_form: string[]
   away_form: string[]
-  home_advantage: boolean
   // Real - null when there's no prior real match to compute from,
   // never a guessed default. See backend app/knowledge/rest_days.py.
   rest_days_home: number | null

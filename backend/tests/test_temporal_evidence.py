@@ -68,7 +68,6 @@ def make_profile(home="Home FC", away="Away FC"):
         away_team=away,
         home_form=[],
         away_form=[],
-        home_advantage=True,
         rest_days_home=0,
         rest_days_away=0,
         head_to_head={},

@@ -1,4 +1,4 @@
-from app.collectors.normalizer import normalize_match
+from app.collectors.normalizer import normalize_match, normalize_status
 from app.providers.football_data_provider import FootballDataProvider
 from app.repositories.match_repository import MatchRepository
 
@@ -28,7 +28,12 @@ class HistoricalMatchCollector:
         finished_matches = [
             normalize_match(match)
             for match in matches
-            if match["status"] == "FINISHED"
+            if normalize_status(
+                match["status"],
+                match.get("score", {}).get("fullTime", {}).get("home"),
+                match.get("score", {}).get("fullTime", {}).get("away"),
+            )
+            == "finished"
         ]
 
         self.repository.save_historical_matches(

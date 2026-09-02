@@ -5,7 +5,6 @@ from app.evidence.form_evidence import get_recent_form
 from app.evidence.goal_evidence import get_goal_statistics
 from app.evidence.h2h_evidence import get_head_to_head
 from app.evidence.home_away_evidence import get_home_away_statistics
-from app.evidence.rest_evidence import get_rest_information
 from app.evidence.streak_evidence import get_current_streak
 from app.knowledge.match_profile import MatchProfile
 
@@ -45,9 +44,7 @@ def build_evidence(
                 before=kickoff,
                 exclude_match_id=match_id,
             ),
-            "rest": get_rest_information(
-                profile.home_team,
-            ),
+            "rest_days": profile.rest_days_home,
         },
         "away_team": {
             "name": profile.away_team,
@@ -71,9 +68,7 @@ def build_evidence(
                 before=kickoff,
                 exclude_match_id=match_id,
             ),
-            "rest": get_rest_information(
-                profile.away_team,
-            ),
+            "rest_days": profile.rest_days_away,
         },
         "head_to_head": get_head_to_head(
             profile.home_team,
@@ -93,9 +88,11 @@ def build_supporting_evidence(evidence: dict) -> list[Evidence]:
 
     A signal is only reported when there is a real difference to
     report; ties and empty samples are omitted rather than reported
-    as a fabricated zero. `rest` is deliberately excluded - it is a
-    hardcoded placeholder (see rest_evidence.py), not real data, and
-    including it here would mean manufacturing evidence.
+    as a fabricated zero. `rest_days` is real (app/knowledge/rest_days.py,
+    computed under the same before/exclude_match_id boundary as
+    everything else) but only becomes a signal when both teams have a
+    computable value - a missing prior match (None) is never treated
+    as zero rest.
     """
 
     items: list[Evidence] = []
@@ -222,5 +219,30 @@ def build_supporting_evidence(evidence: dict) -> list[Evidence]:
                     ),
                 )
             )
+
+    # --- Rest days ---
+    home_rest = home["rest_days"]
+    away_rest = away["rest_days"]
+
+    if (
+        home_rest is not None
+        and away_rest is not None
+        and home_rest != away_rest
+    ):
+        home_favoured = home_rest > away_rest
+        leader = home_name if home_favoured else away_name
+
+        items.append(
+            Evidence(
+                title="Rest Days",
+                supports="HOME" if home_favoured else "AWAY",
+                strength=float(abs(home_rest - away_rest)),
+                reason=(
+                    f"{leader} had more rest before this match "
+                    f"({home_rest} days for {home_name} vs "
+                    f"{away_rest} days for {away_name})."
+                ),
+            )
+        )
 
     return items
