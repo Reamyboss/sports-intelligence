@@ -95,10 +95,13 @@ yet.
 
 ```bash
 cd backend
-python sync_matches.py                        # Premier League fixtures only
-python scripts/collect_historical_matches.py   # Premier League 2025/26 results only
-python scripts/sync_all_competitions.py        # all 12 available competitions, paced for rate limits (~3-4 min)
-python scripts/sync_all_teams.py               # team rosters for all 12 competitions (~1-2 min)
+python sync_matches.py                          # Premier League fixtures only
+python scripts/collect_historical_matches.py     # Premier League 2025/26 results only
+python scripts/sync_all_competitions.py          # all 12 available competitions, paced for rate limits (~3-4 min)
+python scripts/sync_all_teams.py                 # team rosters for all 12 competitions (~1-2 min)
+python scripts/backfill_source_field.py          # one-time: tags existing rows source=football-data.org
+python scripts/collect_football_data_co_uk.py    # 10 extra seasons of free historical depth, 8 competitions
+python scripts/audit_data_provenance.py          # row counts by source/competition, for a sanity check
 ```
 
 These write to `app/data/matches.json` (current-season fixtures),
@@ -106,6 +109,21 @@ These write to `app/data/matches.json` (current-season fixtures),
 goals/streak evidence), and `app/data/teams.json` (team directory). All
 saves merge by id — re-running any of these is safe and won't erase other
 competitions' data.
+
+`collect_football_data_co_uk.py` pulls free, public, no-API-key historical
+results from [football-data.co.uk](https://www.football-data.co.uk) — 10
+seasons (2015/16–2024/25) across the 8 competitions it covers (Premier
+League, Championship, La Liga, Bundesliga, Serie A, Ligue 1, Eredivisie,
+Primeira Liga; Champions League and Brasileirão aren't in its dataset).
+Every row is tagged `source: "football-data.co.uk"` so it's always
+distinguishable from live football-data.org data, deduplicated against it by
+`(competition, date, home team, away team)` — football-data.org's own data
+always wins a collision — and only ever saved for a team whose
+football-data.co.uk short name (`"Man United"`) has a verified, hand-checked
+mapping to this platform's real full name (`"Manchester United FC"`) in
+`app/data/football_data_co_uk_team_map.json`. A club with no entry there is
+skipped and logged, never guessed — re-run `scripts/seed_team_name_map.py`
+after syncing more teams to see what can now be added.
 
 ## API surface
 
