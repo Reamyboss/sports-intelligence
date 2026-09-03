@@ -1,15 +1,16 @@
 # Deployment configuration, in version control.
 #
 # The two live services were created through the Render dashboard, so
-# their settings existed nowhere in this repository - including the one
-# that matters here: ENVIRONMENT is unset on the API, which is why the
-# live health endpoint reports itself as "development".
+# their settings existed nowhere in this repository. That drift is now
+# closed for the one that mattered: ENVIRONMENT=production was set by
+# hand in the API service's dashboard on 2026-09-03, matching the value
+# below, and the live health endpoint confirms "production".
 #
 # Adding this file does not reconfigure the running services. Render
-# applies a blueprint only to services created from one, so this is
-# inert until adopted deliberately. Until then it serves as the record
-# of how the deployment is meant to be configured - and the API's
-# ENVIRONMENT still needs setting to "production" in the dashboard.
+# applies a blueprint only to services created from one, so this stays
+# inert until adopted deliberately - it's the record of how the
+# deployment is meant to be configured, kept in sync with the dashboard
+# by hand rather than by Render applying it directly.
 #
 # FOOTBALL_DATA_API_KEY is deliberately marked sync: false so the
 # secret is entered in the dashboard and never committed here.
