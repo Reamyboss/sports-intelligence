@@ -1,10 +1,12 @@
 from datetime import datetime
 
-from app.evidence.evidence_models import Evidence
+from app.evidence.congestion_evidence import get_fixture_congestion
+from app.evidence.evidence_models import ContextSignal, Evidence
 from app.evidence.form_evidence import get_recent_form
 from app.evidence.goal_evidence import get_goal_statistics
 from app.evidence.h2h_evidence import get_head_to_head
 from app.evidence.home_away_evidence import get_home_away_statistics
+from app.evidence.standings_evidence import get_standings_snapshot
 from app.evidence.streak_evidence import get_current_streak
 from app.knowledge.match_profile import MatchProfile
 
@@ -246,3 +248,124 @@ def build_supporting_evidence(evidence: dict) -> list[Evidence]:
         )
 
     return items
+
+
+def _ordinal(position: int) -> str:
+    """1 -> 1st, 2 -> 2nd, 11 -> 11th, 21 -> 21st."""
+
+    if 10 <= position % 100 <= 20:
+        suffix = "th"
+    else:
+        suffix = {1: "st", 2: "nd", 3: "rd"}.get(position % 10, "th")
+
+    return f"{position}{suffix}"
+
+
+def build_context_signals(
+    profile: MatchProfile,
+    competition: str,
+    season,
+    match_id: int,
+    kickoff: datetime,
+) -> list[ContextSignal]:
+    """
+    Real, computed match context that is shown to the reader but never
+    scored.
+
+    These are ContextSignal, not Evidence, and they travel on
+    PredictionResult.context - not in supporting_evidence. Nothing
+    here reaches prediction_rules or confidence_engine, so adding
+    them changes no prediction, no probability and no confidence
+    value, and leaves the measured backtest accuracy untouched.
+
+    Every value is computed under the same before=kickoff /
+    exclude_match_id boundary as the scored evidence, so a signal can
+    never see the match it describes or anything after it. Where a
+    fact genuinely does not exist - a competition with no table, a
+    season with no completed matches - it is omitted rather than
+    reported as a zero.
+    """
+
+    signals: list[ContextSignal] = []
+
+    home_name = profile.home_team
+    away_name = profile.away_team
+
+    # --- Fixture congestion / fatigue ---
+    home_congestion = get_fixture_congestion(
+        home_name, before=kickoff, exclude_match_id=match_id
+    )
+    away_congestion = get_fixture_congestion(
+        away_name, before=kickoff, exclude_match_id=match_id
+    )
+
+    home_played = home_congestion["matches_played"]
+    away_played = away_congestion["matches_played"]
+    window = home_congestion["window_days"]
+
+    if home_played or away_played:
+        if home_played == away_played:
+            favours = None
+        else:
+            # Fewer matches in the window is the fresher side.
+            favours = "HOME" if home_played < away_played else "AWAY"
+
+        signals.append(
+            ContextSignal(
+                title="Fixture Congestion",
+                home_value=f"{home_played} in {window} days",
+                away_value=f"{away_played} in {window} days",
+                favours=favours,
+                detail=(
+                    f"Matches played in the {window} days before kickoff. "
+                    f"{home_name}: {home_played}. {away_name}: {away_played}. "
+                    "A heavier recent schedule means less recovery, "
+                    "independently of days since the last match."
+                ),
+            )
+        )
+
+    # --- Competition context (standings) ---
+    home_standing = get_standings_snapshot(
+        home_name, competition, season, before=kickoff, exclude_match_id=match_id
+    )
+    away_standing = get_standings_snapshot(
+        away_name, competition, season, before=kickoff, exclude_match_id=match_id
+    )
+
+    # Only comparable when both sides are actually placed in the same
+    # table. One position against nothing is not a comparison.
+    if home_standing and away_standing:
+        home_position = home_standing["position"]
+        away_position = away_standing["position"]
+
+        if home_position == away_position:
+            favours = None
+        else:
+            favours = "HOME" if home_position < away_position else "AWAY"
+
+        signals.append(
+            ContextSignal(
+                title="Competition Context",
+                home_value=(
+                    f"{_ordinal(home_position)}, {home_standing['points']} pts"
+                ),
+                away_value=(
+                    f"{_ordinal(away_position)}, {away_standing['points']} pts"
+                ),
+                favours=favours,
+                detail=(
+                    f"{competition} standings before this match, from "
+                    f"{home_standing['played']} and {away_standing['played']} "
+                    f"matches played of {home_standing['teams_in_table']} teams. "
+                    f"{home_name}: {_ordinal(home_position)} on "
+                    f"{home_standing['points']} points (GD "
+                    f"{home_standing['goal_difference']:+d}). "
+                    f"{away_name}: {_ordinal(away_position)} on "
+                    f"{away_standing['points']} points (GD "
+                    f"{away_standing['goal_difference']:+d})."
+                ),
+            )
+        )
+
+    return signals

@@ -12,6 +12,7 @@ export interface Match {
   home_team: string
   away_team: string
   competition: string
+  season: number | null
   kickoff: string
   home_score: number | null
   away_score: number | null
@@ -44,6 +45,21 @@ export interface Evidence {
   supports: EvidenceSupports
   strength: number
   reason: string
+}
+
+/**
+ * A real computed match fact that is shown but deliberately NOT
+ * scored. It has no `strength` because nothing weighs it - the
+ * backend keeps these on a separate field of a separate type so they
+ * cannot reach the prediction maths. `favours` is commentary for the
+ * reader, not a weight.
+ */
+export interface ContextSignal {
+  title: string
+  home_value: string
+  away_value: string
+  detail: string
+  favours: 'HOME' | 'AWAY' | null
 }
 
 export type PredictionWinner = 'HOME' | 'AWAY' | 'DRAW'
@@ -82,6 +98,11 @@ export interface PredictionResult {
   /** Strongest signal against it. */
   strongest_opposition: Evidence | null
   conflict: ConflictLevel
+  /**
+   * Display-only match context. Shown to the reader, never scored -
+   * these do not move `probability` or `confidence`.
+   */
+  context: ContextSignal[]
   reasoning: ReasoningResult
   explanation: string[]
   summary: string

@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from app.evidence.evidence_models import Evidence
+from app.evidence.evidence_models import ContextSignal, Evidence
 from app.reasoning.reasoning_models import ReasoningResult
 
 
@@ -33,6 +33,13 @@ class PredictionResult(BaseModel):
     conflict: str = "NONE"
 
     market: str
+
+    # Real computed match context, shown to the reader but never
+    # scored. Deliberately a separate field of a separate type from
+    # supporting_evidence: nothing in prediction_rules or
+    # confidence_engine reads this, so it cannot move a probability
+    # or a confidence value.
+    context: list[ContextSignal] = []
 
     reasoning: ReasoningResult
 

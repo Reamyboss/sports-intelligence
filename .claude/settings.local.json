@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C backend log --oneline -15)",
+      "Bash(python -c \"import app\")",
+      "Bash(python -m pytest -q)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://127.0.0.1:8000/)",
+      "Bash(curl -s \"http://127.0.0.1:8000/matches/\")",
+      "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(d[0]['id']\\)\")",
+      "Bash(python -c ' *)",
+      "Bash(curl -sS -o /tmp/test_e0.csv -w \"HTTP:%{http_code} SIZE:%{size_download}\\\\n\" --max-time 20 \"https://www.football-data.co.uk/mmz4281/2425/E0.csv\")",
+      "Read(//tmp/**)",
+      "WebFetch(domain:www.football-data.co.uk)",
+      "Bash(xargs cat)",
+      "Bash(python scripts/backfill_source_field.py)",
+      "Bash(PYTHONPATH=. python scripts/backfill_source_field.py)",
+      "Bash(PYTHONPATH=. python scripts/collect_football_data_co_uk.py)",
+      "Bash(netstat -ano)",
+      "Bash(PYTHONPATH=. python scripts/run_backtest.py)",
+      "PowerShell(Get-CimInstance Win32_Process -Filter \"Name='python.exe'\")"
+    ]
+  }
+}

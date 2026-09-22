@@ -1,6 +1,10 @@
 from fastapi import APIRouter, HTTPException
 
-from app.evidence.evidence_builder import build_evidence, build_supporting_evidence
+from app.evidence.evidence_builder import (
+    build_context_signals,
+    build_evidence,
+    build_supporting_evidence,
+)
 from app.knowledge.knowledge_builder import build_match_profile
 from app.prediction.prediction_models import PredictionResult
 from app.prediction.prediction_service import run_prediction
@@ -38,9 +42,20 @@ def get_prediction(match_id: int) -> PredictionResult:
 
     supporting_evidence = build_supporting_evidence(evidence)
 
+    # Display-only context, built under the same temporal boundary.
+    # It is attached to the response and never scored.
+    context = build_context_signals(
+        profile,
+        competition=match.competition,
+        season=match.season,
+        match_id=match.id,
+        kickoff=match.kickoff,
+    )
+
     prediction = run_prediction(
         evidence=evidence,
         supporting_evidence=supporting_evidence,
+        context=context,
     )
 
     return prediction

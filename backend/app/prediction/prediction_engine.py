@@ -1,4 +1,5 @@
 from app.confidence.confidence_engine import calculate_confidence
+from app.evidence.evidence_models import ContextSignal
 from app.prediction.prediction_models import PredictionResult
 from app.prediction.prediction_rules import (
     match_probabilities,
@@ -17,9 +18,15 @@ from app.reasoning.signal_ranking import (
 
 def predict(
     reasoning: ReasoningResult,
+    context: list[ContextSignal] | None = None,
 ) -> PredictionResult:
     """
     Generate a prediction from reasoning.
+
+    `context` is display-only match context. It is attached to the
+    result untouched and is never read by any calculation below -
+    omitting it produces byte-identical predictions, which is why it
+    defaults to nothing.
     """
 
     prediction, _home_lean_index = predict_match_winner(
@@ -58,6 +65,7 @@ def predict(
         strongest_support=strongest(supporting),
         strongest_opposition=strongest(opposing),
         conflict=conflict_level(ranked),
+        context=list(context or []),
         reasoning=reasoning,
         explanation=explain(reasoning),
         summary=summarize(

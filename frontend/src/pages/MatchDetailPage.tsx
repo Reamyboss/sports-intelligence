@@ -7,6 +7,7 @@ import { ApiError } from '../api/client'
 import type { Match, MatchProfile, PredictionResult } from '../api/types'
 import { MatchHeader } from '../components/MatchHeader'
 import { MatchIntelligence } from '../components/MatchIntelligence'
+import { MatchContext } from '../components/MatchContext'
 import { DecisionDrivers } from '../components/DecisionDrivers'
 import { PredictionCaveat } from '../components/PredictionCaveat'
 import { EvidenceBreakdown } from '../components/EvidenceBreakdown'
@@ -97,6 +98,7 @@ export function MatchDetailPage() {
           <DecisionDrivers prediction={state.data.prediction} />
           <EvidenceBreakdown prediction={state.data.prediction} />
           <MatchIntelligence profile={state.data.profile} />
+          <MatchContext prediction={state.data.prediction} />
           <KeyFactors
             supportingEvidence={state.data.prediction.reasoning.supporting_evidence}
             homeTeam={state.data.prediction.reasoning.home_team}

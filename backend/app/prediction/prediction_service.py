@@ -5,6 +5,7 @@ from app.reasoning.reasoning_engine import build_reasoning
 def run_prediction(
     evidence: dict,
     supporting_evidence: list,
+    context: list | None = None,
 ):
     """
     Execute the complete prediction pipeline.
@@ -21,4 +22,4 @@ def run_prediction(
         supporting_evidence=supporting_evidence,
     )
 
-    return predict(reasoning)
+    return predict(reasoning, context=context)
