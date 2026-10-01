@@ -13,3 +13,4 @@ venv/
 # IDE
 .vscode/
 .idea/.claude/
+x_posts_preview.md
