@@ -29,12 +29,11 @@ class Settings(BaseSettings):
     ]
 
     # Vercel preview deployments get a new hostname per commit and per
-    # branch, so they can't be listed above. This matches only the
-    # frontend project's previews under the agrilink-ai team, e.g.
-    # sports-intelligence-git-my-branch-agrilink-ai.vercel.app.
-    CORS_ORIGIN_REGEX: str | None = (
-        r"https://sports-intelligence-[a-z0-9-]+-agrilink-ai\.vercel\.app"
-    )
+    # branch, so they can't be listed above. Unset by default: preview
+    # URLs end in the owning Vercel account's slug, so set this on the
+    # API project to match that account's frontend previews only, e.g.
+    # https://sports-intelligence-[a-z0-9-]+-<account-slug>\.vercel\.app
+    CORS_ORIGIN_REGEX: str | None = None
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 

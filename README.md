@@ -157,11 +157,13 @@ scripts out of the bundle, so cold starts stay short. The function's
 filesystem is read-only, which is fine for the API: it only ever reads
 `app/data/`.
 
-CORS allows the production frontend (`CORS_ORIGINS` in `app/config.py`)
-and the frontend project's preview deployments (`CORS_ORIGIN_REGEX`). If
-Vercel assigns the frontend a different production domain, set
+CORS allows the production frontend (`CORS_ORIGINS` in `app/config.py`).
+If Vercel assigns the frontend a different production domain, set
 `CORS_ORIGINS` on the API project as a JSON list instead of editing the
-default.
+default. To let the frontend's preview deployments call the API too, set
+`CORS_ORIGIN_REGEX` on the API project to match that Vercel account's
+preview hostnames, e.g.
+`https://sports-intelligence-[a-z0-9-]+-<account-slug>\.vercel\.app`.
 
 `render.yaml` describes the previous Render deployment and is kept only
 until the Vercel deployment has fully replaced it.
