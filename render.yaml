@@ -1,3 +1,7 @@
+# RETIRING: the platform is moving to Vercel (see "Deployment" in the
+# README). Delete this file and the two Render services once the Vercel
+# deployment is live and verified.
+#
 # Deployment configuration, in version control.
 #
 # The two live services were created through the Render dashboard, so

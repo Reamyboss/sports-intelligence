@@ -1,3 +1,6 @@
+import pytest
+
+
 def test_health_endpoint(client):
     response = client.get("/")
 
@@ -40,3 +43,32 @@ def test_cors_headers_present_for_production_frontend_origin(client):
         response.headers.get("access-control-allow-origin")
         == "https://sports-intelligence-svpl.onrender.com"
     )
+
+
+
+@pytest.mark.parametrize(
+    "origin",
+    [
+        "https://sports-intelligence.vercel.app",
+        "https://sports-intelligence-git-main-agrilink-ai.vercel.app",
+        "https://sports-intelligence-a1b2c3d4e-agrilink-ai.vercel.app",
+    ],
+)
+def test_cors_allows_vercel_frontend_origins(client, origin):
+    response = client.get("/", headers={"Origin": origin})
+
+    assert response.headers.get("access-control-allow-origin") == origin
+
+
+@pytest.mark.parametrize(
+    "origin",
+    [
+        "https://evil.vercel.app",
+        "https://sports-intelligence-x-other-team.vercel.app",
+        "https://sports-intelligence-x-agrilink-ai.vercel.app.evil.com",
+    ],
+)
+def test_cors_rejects_other_vercel_origins(client, origin):
+    response = client.get("/", headers={"Origin": origin})
+
+    assert "access-control-allow-origin" not in response.headers

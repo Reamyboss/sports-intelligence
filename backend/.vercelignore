@@ -1,0 +1,8 @@
+tests/
+scripts/
+sync_matches.py
+pytest.ini
+requirements-dev.txt
+.env
+.venv/
+__pycache__/
