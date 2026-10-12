@@ -1,0 +1,9 @@
+# Store every text file with LF line endings, whatever the editor or OS
+# writes. Without this, saving on Windows flipped whole files to CRLF and
+# buried real changes under line-ending noise - one commit showed 330k
+# changed lines for about 1k lines of actual work.
+* text=auto eol=lf
+
+*.svg text eol=lf
+*.png binary
+*.ico binary
