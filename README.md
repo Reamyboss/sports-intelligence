@@ -60,7 +60,8 @@ FOOTBALL_DATA_API_KEY=your_football_data_org_key
 
 A free key from football-data.org covers 12 competitions at roughly 10
 requests/minute — see `scripts/sync_all_competitions.py` for the exact list
-and pacing.
+and pacing. The key is only needed to sync data — the API server and the
+test suite run without it.
 
 ## Running the server
 
@@ -90,6 +91,9 @@ every API route including 404 paths. It does **not** cover
 `FootballDataProvider` / `SyncService` / `HistoricalMatchCollector` — those
 make real network calls and would need HTTP mocking, which hasn't been added
 yet.
+
+CI (`.github/workflows/ci.yml`) runs this suite, plus the frontend's lint
+and build, on every pull request and every push to `main`.
 
 ## Getting real data
 
