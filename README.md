@@ -49,7 +49,7 @@ Each layer has one job and doesn't reach into the others:
 cd backend
 python -m venv .venv          # if not already created
 .venv\Scripts\activate         # Windows
-pip install -r requirements.txt
+pip install -r requirements-dev.txt   # runtime deps + pytest
 ```
 
 Create `backend/.env`:
@@ -60,7 +60,8 @@ FOOTBALL_DATA_API_KEY=your_football_data_org_key
 
 A free key from football-data.org covers 12 competitions at roughly 10
 requests/minute — see `scripts/sync_all_competitions.py` for the exact list
-and pacing.
+and pacing. The key is only needed to sync data — the API server and the
+test suite run without it.
 
 ## Running the server
 
@@ -90,6 +91,9 @@ every API route including 404 paths. It does **not** cover
 `FootballDataProvider` / `SyncService` / `HistoricalMatchCollector` — those
 make real network calls and would need HTTP mocking, which hasn't been added
 yet.
+
+CI (`.github/workflows/ci.yml`) runs this suite, plus the frontend's lint
+and build, on every pull request and every push to `main`.
 
 ## Getting real data
 
@@ -124,6 +128,45 @@ mapping to this platform's real full name (`"Manchester United FC"`) in
 `app/data/football_data_co_uk_team_map.json`. A club with no entry there is
 skipped and logged, never guessed — re-run `scripts/seed_team_name_map.py`
 after syncing more teams to see what can now be added.
+
+## Deployment (Vercel)
+
+Both halves deploy to Vercel as two projects linked to this repository.
+Every push to `main` deploys production; every other branch and pull
+request gets its own preview URL.
+
+| Project | Root directory | Framework | Config |
+|---|---|---|---|
+| `sports-intelligence-api` | `backend` | FastAPI | `backend/vercel.json`, `backend/.python-version` |
+| `sports-intelligence` | `frontend` | Vite | `frontend/vercel.json` (SPA rewrite) |
+
+Environment variables:
+
+| Project | Variable | Value |
+|---|---|---|
+| `sports-intelligence-api` | `ENVIRONMENT` | `production` (Production only) |
+| `sports-intelligence` | `VITE_API_BASE_URL` | the API project's production URL, e.g. `https://sports-intelligence-api.vercel.app` |
+
+`FOOTBALL_DATA_API_KEY` is **not** needed on Vercel — the API only reads
+the committed JSON data; the key is used by the sync scripts.
+
+The API runs as a serverless function: `backend/requirements.txt` holds
+runtime dependencies only (dev/test tools live in
+`requirements-dev.txt`) and `backend/.vercelignore` keeps tests and sync
+scripts out of the bundle, so cold starts stay short. The function's
+filesystem is read-only, which is fine for the API: it only ever reads
+`app/data/`.
+
+CORS allows the production frontend (`CORS_ORIGINS` in `app/config.py`).
+If Vercel assigns the frontend a different production domain, set
+`CORS_ORIGINS` on the API project as a JSON list instead of editing the
+default. To let the frontend's preview deployments call the API too, set
+`CORS_ORIGIN_REGEX` on the API project to match that Vercel account's
+preview hostnames, e.g.
+`https://sports-intelligence-[a-z0-9-]+-<account-slug>\.vercel\.app`.
+
+`render.yaml` describes the previous Render deployment and is kept only
+until the Vercel deployment has fully replaced it.
 
 ## API surface
 

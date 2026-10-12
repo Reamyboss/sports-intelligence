@@ -1,0 +1,6 @@
+# Line-ending-only commits. Use with:
+#   git config blame.ignoreRevsFile .git-blame-ignore-revs
+# (GitHub applies this file automatically.)
+
+# chore: normalize all text files to LF line endings
+273d4f67a200f3755dd0e9f16d1c900aece923d9
